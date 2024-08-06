@@ -7,7 +7,7 @@ use Inertia\Inertia;
 
 class ArticleController extends Controller {
     public function index() {
-        $articles = Auth::user()->articles();
+        $articles = Auth::user()->articles;
         return Inertia::render('Dashboard', [
             'articles' => $articles
         ]);

@@ -30,15 +30,13 @@ const logout = () => {
 </script>
 
 <template>
-    <div>
-        <Head :title="title" />
+    <Head :title="title" />
 
-        <Banner />
+    <Banner />
 
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
-                <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="fixed top-0 z-40 w-full bg-white border-b border-gray-100">
+        <!-- Primary Navigation Menu -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
                         <div class="flex">
                             <!-- Logo -->
@@ -188,18 +186,18 @@ const logout = () => {
                             </button>
                         </div>
                     </div>
+        </div>
+
+        <!-- Responsive Navigation Menu -->
+        <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
+                <div class="pt-2 pb-3 space-y-1">
+                    <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                        Dashboard
+                    </ResponsiveNavLink>
                 </div>
 
-                <!-- Responsive Navigation Menu -->
-                <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
-                    <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
-
-                    <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
+                <!-- Responsive Settings Options -->
+                <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="flex items-center px-4">
                             <div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 me-3">
                                 <img class="h-10 w-10 rounded-full object-cover" :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name">
@@ -271,37 +269,35 @@ const logout = () => {
                                 </template>
                             </template>
                         </div>
-                    </div>
                 </div>
-            </nav>
-
-            <!-- Sidebar Navigation -->
-            <aside class="bg-white shadow w-64">
-                <ul>
-                    <li>
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        <a @click="showArticleForm = !showArticleForm">Write an article</a>
-                    </li>
-                </ul>
-            </aside>
-
-            <form v-show="showArticleForm" class="max-w-sm mx-auto">
-                <div class="mb-5">
-                    <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                    <input type="text" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title" required />
-                </div>
-                <div class="mb-5">
-                    <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
-                    <TextInput id="title" placeholder="Content" required />
-                </div>
-            </form>
-
-            <!-- Page Content -->
-            <main>
-                <slot />
-            </main>
         </div>
-    </div>
+    </nav>
+
+    <!-- Sidebar Navigation -->
+    <aside class="fixed top-0 z-30 bg-white shadow w-64 h-screen pt-20">
+        <ul>
+            <li>
+                <a href="#">Home</a>
+            </li>
+            <li>
+                <a @click="showArticleForm = !showArticleForm">Write an article</a>
+            </li>
+        </ul>
+    </aside>
+
+    <form v-show="showArticleForm" class="fixed z-50 mx-auto my-auto">
+        <div class="p-4 mb-5">
+            <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+            <input type="text" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title" required />
+        </div>
+        <div class="mb-5">
+            <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
+            <TextInput id="title" placeholder="Content" required />
+        </div>
+    </form>
+
+    <!-- Page Content -->
+    <main class="fixed top-0 z-20 p-16 ml-64">
+        <slot />
+    </main>
 </template>
