@@ -1,14 +1,13 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
+defineProps({ articles: Array })
 </script>
 
 <template>
     <AppLayout title="Dashboard">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Dashboard
-            </h2>
-        </template>
-
+        <div v-for="article in articles" :key="article.id">
+            <p>{{ article.title }}</p>
+            <p>{{ article.content }}</p>
+        </div>
     </AppLayout>
 </template>
