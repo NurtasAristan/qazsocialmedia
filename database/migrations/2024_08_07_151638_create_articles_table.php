@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('content', 255);
+            $table->timestamps();
         });
 
         Schema::create('article_user', function (Blueprint $table) {
