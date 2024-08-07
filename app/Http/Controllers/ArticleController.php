@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Article;
-use App\Http\Request\StoreArticleRequest;
+use App\Http\Requests\StoreArticleRequest;
 
 class ArticleController extends Controller {
     public function index() {
@@ -17,7 +17,7 @@ class ArticleController extends Controller {
 
     public function store(StoreArticleRequest $request) {
         $newArticle = Article::create($request->validated());
-        Auth::user()->articles()->attach($newArticle->id());
+        Auth::user()->articles()->attach($newArticle->id);
         return to_route('dashboard');
     }
 }

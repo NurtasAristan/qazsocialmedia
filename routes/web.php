@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\ArticleController;
+use App\Http\Request\StoreArticleRequest;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
