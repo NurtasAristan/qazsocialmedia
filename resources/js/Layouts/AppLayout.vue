@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { Head, Link, router } from '@inertiajs/vue3';
+import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -27,12 +27,18 @@ const switchToTeam = (team) => {
 const logout = () => {
     router.post(route('logout'));
 };
+
+const form = useForm({
+  title: null,
+  content: null,
+})
+
 </script>
 
 <template>
     <Head :title="title" />
 
-    <Banner />
+    <!--Banner /-->
 
     <nav class="fixed top-0 z-40 w-full bg-white border-b border-gray-100">
         <!-- Primary Navigation Menu -->
@@ -285,16 +291,20 @@ const logout = () => {
         </ul>
     </aside>
 
-    <form v-show="showArticleForm" class="fixed z-50 px-auto py-auto">
-        <div class="p-4 mb-5">
-            <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-            <input type="text" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title" required />
-        </div>
-        <div class="mb-5">
-            <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
-            <TextInput id="title" placeholder="Content" required />
-        </div>
-    </form>
+    <div v-show="showArticleForm" class="flex justify-center items-center h-screen">
+        <form @submit.prevent="form.post('/dashboard')" class="w-full max-w-md rounded border-2">
+            <div class="p-4 mb-5">
+                <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                <input type="text" v-model="form.title" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title" required />
+            </div>
+            <div class="p-4 mb-5">
+                <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
+                <input type="text" v-model="form.content" id="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Content" required />
+            </div>
+            <button type="submit">Save an article</button>
+        </form>
+    </div>
+    
 
     <!-- Page Content -->
     <main class="fixed top-0 z-20 p-16 ml-64">

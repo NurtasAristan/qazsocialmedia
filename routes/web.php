@@ -20,4 +20,5 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [ArticleController::class, 'index'])->name('dashboard');
+    Route::post('/dashboard', [ArticleController::class, 'store'])->name('dashboard.store');
 });
