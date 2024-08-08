@@ -2,15 +2,14 @@
 import { ref } from 'vue';
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
-import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import TextInput from '@/Components/TextInput.vue';
 
 defineProps({
     title: String,
+    categories: Array
 });
 
 const showingNavigationDropdown = ref(false);
@@ -29,8 +28,9 @@ const logout = () => {
 };
 
 const form = useForm({
-  title: null,
-  content: null,
+    category_id: null,
+    title: null,
+    content: null,
 })
 
 </script>
@@ -40,7 +40,7 @@ const form = useForm({
 
     <!--Banner /-->
 
-    <nav class="fixed top-0 z-40 w-full bg-white border-b border-gray-100">
+    <nav class="fixed top-0 z-40 w-full bg-cyan-300 border-b border-gray-100">
         <!-- Primary Navigation Menu -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -280,19 +280,30 @@ const form = useForm({
     </nav>
 
     <!-- Sidebar Navigation -->
-    <aside class="fixed top-0 z-30 bg-white shadow w-64 h-screen pt-20">
-        <ul>
+    <aside class="fixed top-0 z-30 bg-white shadow w-64 h-screen pt-20 border-2">
+        <ul class="px-3 font-medium">
             <li>
-                <a href="#">Home</a>
+                <a href="#" class="flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <span class="ms-3">Home</span>
+                </a>
             </li>
             <li>
-                <a @click="showArticleForm = !showArticleForm">Write an article</a>
+                <a @click="showArticleForm = !showArticleForm" class="flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <span class="ms-3">Write an article</span>
+                </a>
             </li>
         </ul>
     </aside>
 
-    <div v-show="showArticleForm" class="flex justify-center items-center h-screen">
+    <div v-show="showArticleForm" class="absolute z-50 flex justify-center items-center h-screen">
         <form @submit.prevent="form.post('/dashboard')" class="w-full max-w-md rounded border-2">
+            <div class="p-4 mb-5">
+                <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                <select v-model="form.category_id" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title" required>
+                    <option disabled >Choose a country</option>
+                    <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.category }}</option>
+                </select>
+            </div>
             <div class="p-4 mb-5">
                 <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
                 <input type="text" v-model="form.title" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title" required />
@@ -301,13 +312,15 @@ const form = useForm({
                 <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
                 <input type="text" v-model="form.content" id="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Content" required />
             </div>
-            <button type="submit">Save an article</button>
+            <button type="submit" class="text-white  inline-flex w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Save an article
+            </button>
         </form>
     </div>
     
 
     <!-- Page Content -->
-    <main class="fixed top-0 z-20 p-16 ml-64">
+    <main class="fixed top-0 z-20 w-3/4 p-16 ml-64">
         <slot />
     </main>
 </template>

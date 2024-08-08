@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreArticleRequest;
+use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use App\Models\Article;
-use App\Http\Requests\StoreArticleRequest;
 
 class ArticleController extends Controller {
     public function index() {
-        $articles = Auth::user()->articles;
+        $myArticles = Auth::user()->articles;
+        $categories = Category::all();
         return Inertia::render('Dashboard', [
-            'articles' => $articles
+            'myArticles' => $myArticles,
+            'categories' => $categories
         ]);
     }
 
     public function store(StoreArticleRequest $request) {
-        $newArticle = Article::create($request->validated());
+        $newArticle = Article::create($request->safe()->only(['title', 'content']));
         Auth::user()->articles()->attach($newArticle->id);
+        $newArticle->categories()->attach($request->safe()->only(['category_id']));
         return to_route('dashboard');
     }
 }

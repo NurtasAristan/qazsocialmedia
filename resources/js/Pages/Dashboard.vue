@@ -1,12 +1,15 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-defineProps({ articles: Array })
+defineProps({ 
+    myArticles: Array,
+    categories: Array
+})
 </script>
 
 <template>
-    <AppLayout title="Dashboard">
-        <div v-for="article in articles" :key="article.id">
-            <p>{{ article.title }}</p>
+    <AppLayout title="Dashboard" :categories="categories">
+        <div v-for="article in myArticles" :key="article.id" class="m-4 p-4 w-64 rounded border-2">
+            <p class="font-bold">{{ article.title }}</p>
             <p>{{ article.content }}</p>
         </div>
     </AppLayout>
