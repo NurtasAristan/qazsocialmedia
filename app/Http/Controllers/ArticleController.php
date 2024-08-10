@@ -10,8 +10,9 @@ use Inertia\Inertia;
 
 class ArticleController extends Controller {
     public function index() {
-        $myArticles = Auth::user()->articles;
+        $myArticles = Auth::user()->articles()->with('categories')->get();
         $categories = Category::all();
+
         return Inertia::render('Dashboard', [
             'myArticles' => $myArticles,
             'categories' => $categories
