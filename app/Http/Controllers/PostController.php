@@ -20,8 +20,8 @@ class PostController extends Controller {
     }
 
     public function store(StorePostRequest $request) {
-        $newArticle = Post::create($request->safe()->only(['title', 'content']));
-        Auth::user()->posts()->attach($myPosts->id);
+        $newPost = Post::create($request->safe()->only(['title', 'content']));
+        Auth::user()->posts()->attach($newPost->id);
         $myPosts->categories()->attach($request->safe()->only(['category_id']));
         return to_route('dashboard');
     }
