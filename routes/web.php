@@ -3,8 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\ArticleController;
-use App\Http\Request\StoreArticleRequest;
+use App\Http\Controllers\PostController;
+use App\Http\Request\StorePostRequest;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -20,6 +20,6 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', [ArticleController::class, 'index'])->name('dashboard');
-    Route::post('/dashboard', [ArticleController::class, 'store'])->name('dashboard.store');
+    Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
+    Route::post('/dashboard', [PostController::class, 'store'])->name('dashboard.store');
 });
