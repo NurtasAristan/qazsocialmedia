@@ -293,7 +293,7 @@ const form = useForm({
         </ul>
     </aside>
 
-    <div v-show="showPostForm" class="absolute z-50 flex justify-center items-center h-screen">
+    <div v-show="showPostForm" class="absolute z-50 flex justify-center items-center h-screen bg-yellow-300">
         <form @submit.prevent="form.post('/dashboard')" class="w-full max-w-md rounded border-2">
             <div class="p-4 mb-5">
                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
