@@ -53,7 +53,7 @@ const form = useForm({
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex bg-yellow-300">
                                 SN Name
                             </div>
                         </div>
