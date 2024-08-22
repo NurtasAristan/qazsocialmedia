@@ -63,7 +63,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function articles() {
-        return $this->belongsToMany(Article::class);
+    public function posts() {
+        return $this->belongsToMany(Post::class);
     }
 }

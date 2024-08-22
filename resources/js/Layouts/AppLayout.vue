@@ -13,7 +13,7 @@ defineProps({
 });
 
 const showingNavigationDropdown = ref(false);
-const showArticleForm = ref(false);
+const showPostForm = ref(false);
 
 const switchToTeam = (team) => {
     router.put(route('current-team.update'), {
@@ -288,14 +288,14 @@ const form = useForm({
                 </a>
             </li>
             <li>
-                <a @click="showArticleForm = !showArticleForm" class="flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                <a @click="showPostForm = !showPostForm" class="flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
                     <span class="ms-3">Write an article</span>
                 </a>
             </li>
         </ul>
     </aside>
 
-    <div v-show="showArticleForm" class="absolute z-50 flex justify-center items-center h-screen">
+    <div v-show="showPostForm" class="absolute z-50 flex justify-center items-center h-screen">
         <form @submit.prevent="form.post('/dashboard')" class="w-full max-w-md rounded border-2">
             <div class="p-4 mb-5">
                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>

@@ -16,7 +16,7 @@ class Category extends Model
      */
     public $timestamps = false;
 
-    public function articles() {
-        return $this->belongsToMany(Article::class);
+    public function posts() {
+        return $this->belongsToMany(Post::class);
     }
 }
