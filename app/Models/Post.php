@@ -23,8 +23,20 @@ class Post extends Model {
         return $this->belongsToMany(Category::class);
     }
 
+    public function comments() {
+        return $this->hasMany(Comment::class)->latest();
+    }
+
+    public function likes() {
+        return $this->hasMany(Like::class);
+    }
+
     public function users() {
         return $this->belongsToMany(User::class);
+    }
+
+    public function userLikes() {
+        return $this->hasMany(Like::class)->where('user_id', auth()->id());
     }
 
 }
