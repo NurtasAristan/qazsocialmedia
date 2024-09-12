@@ -10,7 +10,7 @@ use Inertia\Inertia;
 
 class PostController extends Controller {
     public function index() {
-        $myPosts = Auth::user()->posts()->with('categories')->get();
+        $myPosts = Auth::user()->posts()->get();
         $categories = Category::all();
 
         return Inertia::render('Dashboard', [
@@ -19,10 +19,17 @@ class PostController extends Controller {
         ]);
     }
 
+    public function show() {
+        $posts = Post::all();
+
+        return Inertia::render('Explore', [
+            'posts' => $posts
+        ]);
+    }
+
     public function store(StorePostRequest $request) {
-        $newPost = Post::create($request->safe()->only(['title', 'content']));
+        $newPost = Post::create($request->validated());
         Auth::user()->posts()->attach($newPost->id);
-        $myPosts->categories()->attach($request->safe()->only(['category_id']));
         return to_route('dashboard');
     }
 }

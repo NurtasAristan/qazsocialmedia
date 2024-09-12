@@ -12,6 +12,7 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'language' => App::getLocale(),
     ]);
 });
 
@@ -21,5 +22,6 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
+    Route::get('/explore', [PostController::class, 'show'])->name('explore');
     Route::post('/dashboard', [PostController::class, 'store'])->name('dashboard.store');
 });

@@ -13,7 +13,6 @@ defineProps({
 });
 
 const showingNavigationDropdown = ref(false);
-const showPostForm = ref(false);
 
 const switchToTeam = (team) => {
     router.put(route('current-team.update'), {
@@ -26,13 +25,6 @@ const switchToTeam = (team) => {
 const logout = () => {
     router.post(route('logout'));
 };
-
-const form = useForm({
-    category_id: null,
-    title: null,
-    content: null,
-})
-
 </script>
 
 <template>
@@ -281,41 +273,15 @@ const form = useForm({
     <aside class="fixed top-0 z-30 bg-yellow-300 shadow w-64 h-screen pt-20 border-2">
         <ul class="px-3 font-medium">
             <li>
-                <a href="#" class="flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                <a href="/dashboard" class="flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
                     <span class="ms-3">Home</span>
                 </a>
-            </li>
-            <li>
-                <a @click="showPostForm = !showPostForm" class="flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <span class="ms-3">Write an article</span>
+                <a href="/explore" class="flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <span class="ms-3">Explore</span>
                 </a>
             </li>
         </ul>
     </aside>
-
-    <div v-show="showPostForm" class="w-full absolute z-50 flex justify-center items-center h-screen bg-transparent">
-        <form @submit.prevent="form.post('/dashboard')" class="w-full max-w-md rounded border-2 bg-yellow-300">
-            <div class="p-4 mb-5">
-                <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                <select v-model="form.category_id" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title" required>
-                    <option disabled >Choose a country</option>
-                    <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.category }}</option>
-                </select>
-            </div>
-            <div class="p-4 mb-5">
-                <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-                <input type="text" v-model="form.title" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Title" required />
-            </div>
-            <div class="p-4 mb-5">
-                <label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Content</label>
-                <input type="text" v-model="form.content" id="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Content" required />
-            </div>
-            <button type="submit" class="text-white  inline-flex w-full justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Save an article
-            </button>
-        </form>
-    </div>
-    
 
     <!-- Page Content -->
     <main class="fixed top-0 z-20 w-3/4 p-16 ml-64">
