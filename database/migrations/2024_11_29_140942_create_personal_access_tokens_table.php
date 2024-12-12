@@ -11,16 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('personal_access_tokens', function (Blueprint $table) {
             $table->id();
+            $table->morphs('tokenable');
             $table->string('name');
-            $table->string('description', 255);
+            $table->string('token', 64)->unique();
+            $table->text('abilities')->nullable();
+            $table->timestamp('last_used_at')->nullable();
+            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
-        });
-
-        Schema::create('group_user', function (Blueprint $table) {
-            $table->foreignId('group_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -29,7 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
-        Schema::dropIfExists('group_user');
+        Schema::dropIfExists('personal_access_tokens');
     }
 };

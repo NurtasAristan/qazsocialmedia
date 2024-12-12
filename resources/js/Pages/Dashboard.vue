@@ -1,32 +1,172 @@
 <script setup>
-import { useForm } from '@inertiajs/vue3';
+import { reactive, ref } from 'vue';
+import { Link, useForm, router } from '@inertiajs/vue3';
+import DropdownMenu from '@/Components/DropdownMenu.vue'
 import AppLayout from '@/Layouts/AppLayout.vue';
+
 defineProps({ 
-    myPosts: Array,
-    categories: Array
+    user: Object,
+    myPosts: Array
 })
 
+const editingPost = ref(null);
+
 const form = useForm({
+    id: null,
+    title: null,
     content: null,
 })
+
+const startEditing = (post) => {
+    editingPost.value = post;
+    form.id = post.id;
+    form.title = post.title;
+    form.content = post.content;
+};
+
+const cancelEditing = () => {
+    editingPost.value = null;
+    form.reset();
+};
+
+// Submit the edit form
+const submitEdit = () => {
+    form.post(`/posts/${form.id}`, {
+        onSuccess: () => {
+            cancelEditing();
+            alert('Post updated successfully!');
+        },
+    });
+};
+
+const deletePost = (id) => {
+    if (confirm('Are you sure you want to delete this post?')) {
+        router.delete(route("dashboard.destroy",id))
+    }
+};
 </script>
 
 <template>
     <AppLayout title="Dashboard">
-        <div class="flex items-center bg-transparent">
-            <form @submit.prevent="form.post('/dashboard')" class="w-full max-w-md rounded border-2 bg-yellow-300">
-                <div class="p-2">
-                    <textarea v-model="form.content" id="content" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Content" required />
-                </div>
-                <div class="p-2 flex items-center justify-end">
-                    <button type="submit" class="p-4 text-white inline-flex justify-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Save
-                    </button>
+        <!-- Header Section -->
+        <header class="text-center py-6 bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg">
+            <h1 class="text-4xl font-bold">Welcome, {{ user.name }}</h1>
+            <p class="mt-2 text-lg">Share your thoughts and explore posts!</p>
+        </header>
+
+        <!-- Create Post Form -->
+        <div class="my-8 mx-auto max-w-4xl">
+            <form @submit.prevent="form.post('/dashboard')" class="p-6 bg-white rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Create a New Post</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
+                        <input
+                            type="text"
+                            v-model="form.title"
+                            id="title"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="Enter a title"
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
+                        <textarea
+                            v-model="form.content"
+                            id="content"
+                            rows="4"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
+                            placeholder="What's on your mind?"
+                            required
+                        ></textarea>
+                    </div>
+                    <div class="text-right">
+                        <button
+                            type="submit"
+                            class="inline-block px-6 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300"
+                        >
+                            Post
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
-        <div v-for="post in myPosts" :key="post.id" class="my-4 p-2 w-64 rounded border-2">
-            <p>{{ post.content }}</p>
-        </div>
+
+        <div v-if="editingPost" class="my-8 p-6 bg-white rounded-lg shadow-md">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4">Edit Post</h2>
+                <form @submit.prevent="submitEdit">
+                    <div class="space-y-4">
+                        <div>
+                            <label for="edit-title" class="block text-sm font-medium text-gray-700">Title</label>
+                            <input
+                                v-model="form.title"
+                                id="edit-title"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="Enter a title"
+                            />
+                        </div>
+                        <div>
+                            <label for="edit-content" class="block text-sm font-medium text-gray-700">Content</label>
+                            <textarea
+                                v-model="form.content"
+                                id="edit-content"
+                                rows="4"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                placeholder="Write your content..."
+                                required
+                            ></textarea>
+                        </div>
+                        <div class="flex justify-between">
+                            <button
+                                type="button"
+                                @click="cancelEditing"
+                                class="px-4 py-2 text-sm font-medium text-gray-500 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300 focus:outline-none"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                class="px-6 py-2 text-sm font-medium text-white bg-green-600 rounded-lg shadow-md hover:bg-green-700 focus:outline-none"
+                            >
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        <!-- Posts Section -->
+        <section class="my-8">
+            <div class="max-w-4xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <div v-for="post in myPosts" :key="post.id" class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                    <div class="flex justify-between items-center border-b pb-2">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">{{ user.name }}</h3>
+                            <span class="text-sm text-gray-500">Posted on {{ new Date(post.created_at).toLocaleDateString() }}</span>
+                        </div>
+                        <DropdownMenu :post="post" />
+                    </div>
+                    <div class="mt-3">
+                        <h4 class="text-md font-semibold text-gray-700">{{ post.title }}</h4>
+                        <p class="mt-2 text-gray-600">{{ post.content }}</p>
+                    </div>
+                    <div class="mt-4 flex justify-between">
+                        <button
+                            class="text-sm text-blue-500 hover:underline"
+                            @click="startEditing(post)"
+                        >
+                            Edit
+                        </button>
+                        <button
+                            class="text-sm text-red-500 hover:underline"
+                            @click="deletePost(post.id)"
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </AppLayout>
 </template>

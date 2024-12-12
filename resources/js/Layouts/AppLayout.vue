@@ -27,32 +27,32 @@ const logout = () => {
 };
 </script>
 
-<template>
+<!--template>
     <Head :title="title" />
 
-    <!--Banner /-->
+    <-Banner />
 
     <nav class="fixed top-0 z-40 w-full bg-cyan-300 border-b border-gray-100">
-        <!-- Primary Navigation Menu -->
+        <Primary Navigation Menu>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
                         <div class="flex">
-                            <!-- Logo -->
+                            <Logo>
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
                                     <ApplicationMark class="block h-9 w-auto" />
                                 </Link>
                             </div>
 
-                            <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex bg-yellow-300">
+                            <Navigation Links>
+                            <div class="hidden flex items-center justify-center space-x-8 sm:-my-px sm:ms-10 sm:flex bg-yellow-300">
                                 SN Name
                             </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
                             <div class="ms-3 relative">
-                                <!-- Teams Dropdown -->
+                                <Teams Dropdown>
                                 <Dropdown v-if="$page.props.jetstream.hasTeamFeatures" align="right" width="60">
                                     <template #trigger>
                                         <span class="inline-flex rounded-md">
@@ -68,12 +68,12 @@ const logout = () => {
 
                                     <template #content>
                                         <div class="w-60">
-                                            <!-- Team Management -->
+                                            <Team Management>
                                             <div class="block px-4 py-2 text-xs text-gray-400">
                                                 Manage Team
                                             </div>
 
-                                            <!-- Team Settings -->
+                                            <Team Setting>
                                             <DropdownLink :href="route('teams.show', $page.props.auth.user.current_team)">
                                                 Team Settings
                                             </DropdownLink>
@@ -82,7 +82,7 @@ const logout = () => {
                                                 Create New Team
                                             </DropdownLink>
 
-                                            <!-- Team Switcher -->
+                                            <Team Switcher>
                                             <template v-if="$page.props.auth.user.all_teams.length > 1">
                                                 <div class="border-t border-gray-200" />
 
@@ -109,7 +109,7 @@ const logout = () => {
                                 </Dropdown>
                             </div>
 
-                            <!-- Settings Dropdown -->
+                            <-- Settings Dropdown ->
                             <div class="ms-3 relative">
                                 <Dropdown align="right" width="48">
                                     <template #trigger>
@@ -129,7 +129,7 @@ const logout = () => {
                                     </template>
 
                                     <template #content>
-                                        <!-- Account Management -->
+                                        <-- Account Management ->
                                         <div class="block px-4 py-2 text-xs text-gray-400">
                                             Manage Account
                                         </div>
@@ -144,7 +144,7 @@ const logout = () => {
 
                                         <div class="border-t border-gray-200" />
 
-                                        <!-- Authentication -->
+                                        <-- Authentication ->
                                         <form @submit.prevent="logout">
                                             <DropdownLink as="button">
                                                 Log Out
@@ -155,7 +155,7 @@ const logout = () => {
                             </div>
                         </div>
 
-                        <!-- Hamburger -->
+                        <-- Hamburger ->
                         <div class="-me-2 flex items-center sm:hidden">
                             <button class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out" @click="showingNavigationDropdown = ! showingNavigationDropdown">
                                 <svg
@@ -184,7 +184,7 @@ const logout = () => {
                     </div>
         </div>
 
-        <!-- Responsive Navigation Menu -->
+        <-- Responsive Navigation Menu ->
         <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                 <div class="pt-2 pb-3 space-y-1">
                     <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
@@ -192,7 +192,7 @@ const logout = () => {
                     </ResponsiveNavLink>
                 </div>
 
-                <!-- Responsive Settings Options -->
+                <-- Responsive Settings Options ->
                 <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="flex items-center px-4">
                             <div v-if="$page.props.jetstream.managesProfilePhotos" class="shrink-0 me-3">
@@ -218,14 +218,14 @@ const logout = () => {
                                 API Tokens
                             </ResponsiveNavLink>
 
-                            <!-- Authentication -->
+                            <-- Authentication ->
                             <form method="POST" @submit.prevent="logout">
                                 <ResponsiveNavLink as="button">
                                     Log Out
                                 </ResponsiveNavLink>
                             </form>
 
-                            <!-- Team Management -->
+                            <-- Team Management ->
                             <template v-if="$page.props.jetstream.hasTeamFeatures">
                                 <div class="border-t border-gray-200" />
 
@@ -233,7 +233,7 @@ const logout = () => {
                                     Manage Team
                                 </div>
 
-                                <!-- Team Settings -->
+                                <-- Team Settings ->
                                 <ResponsiveNavLink :href="route('teams.show', $page.props.auth.user.current_team)" :active="route().current('teams.show')">
                                     Team Settings
                                 </ResponsiveNavLink>
@@ -242,7 +242,7 @@ const logout = () => {
                                     Create New Team
                                 </ResponsiveNavLink>
 
-                                <!-- Team Switcher -->
+                                <-- Team Switcher ->
                                 <template v-if="$page.props.auth.user.all_teams.length > 1">
                                     <div class="border-t border-gray-200" />
 
@@ -269,7 +269,7 @@ const logout = () => {
         </div>
     </nav>
 
-    <!-- Sidebar Navigation -->
+    <-- Sidebar Navigation ->
     <aside class="fixed top-0 z-30 bg-yellow-300 shadow w-64 h-screen pt-20 border-2">
         <ul class="px-3 font-medium">
             <li>
@@ -279,12 +279,105 @@ const logout = () => {
                 <a href="/explore" class="flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
                     <span class="ms-3">Explore</span>
                 </a>
+                <a href="/friends" class="flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <span class="ms-3">Friends</span>
+                </a>
+                <a href="/chat" class="flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <span class="ms-3">Chat</span>
+                </a>
+                <a href="/groups" class="flex p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <span class="ms-3">Groups</span>
+                </a>
             </li>
         </ul>
     </aside>
 
-    <!-- Page Content -->
-    <main class="fixed top-0 z-20 w-3/4 p-16 ml-64">
+    <-- Page Content ->
+    <main class="relative top-0 z-20 w-3/5 p-16 mx-auto bg-white rounded-lg">
+        <slot />
+    </main>
+</template-->
+
+<template>
+    <Head :title="title" />
+
+    <!-- Top Navigation Bar -->
+    <nav class="fixed top-0 z-40 w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-4">
+                    <Link :href="route('dashboard')">
+                        <ApplicationMark class="block h-9 w-auto" />
+                    </Link>
+                    <span class="text-lg font-bold">Social Network</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden sm:flex sm:items-center space-x-6">
+                    <NavLink :href="route('dashboard')" :active="route().current('dashboard')">Home</NavLink>
+                    <NavLink :href="route('explore')" :active="route().current('explore')">Explore</NavLink>
+                    <NavLink :href="route('friends')" :active="route().current('friends')">Friends</NavLink>
+                    <NavLink :href="route('chat')" :active="route().current('chat')">Chat</NavLink>
+                    <NavLink :href="route('groups')" :active="route().current('groups')">Groups</NavLink>
+                </div>
+
+                <!-- User Dropdown -->
+                <Dropdown align="right" width="48">
+                    <template #trigger>
+                        <button class="flex items-center text-sm font-medium">
+                            <img v-if="$page.props.auth.user.profile_photo_url" :src="$page.props.auth.user.profile_photo_url" class="h-8 w-8 rounded-full" alt="Profile">
+                            <span class="ml-2 hidden sm:inline">{{ $page.props.auth.user.name }}</span>
+                            <svg class="ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </template>
+
+                    <template #content>
+                        <DropdownLink :href="route('profile.show')">Profile</DropdownLink>
+                        <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">API Tokens</DropdownLink>
+                        <form method="POST" @submit.prevent="logout">
+                            <DropdownLink as="button">Logout</DropdownLink>
+                        </form>
+                    </template>
+                </Dropdown>
+
+                <!-- Hamburger Menu for Mobile -->
+                <button @click="showingNavigationDropdown = !showingNavigationDropdown" class="sm:hidden p-2 rounded-md">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path :class="{'hidden': showingNavigationDropdown, 'block': !showingNavigationDropdown}" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <path :class="{'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown}" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Responsive Navigation -->
+        <div v-if="showingNavigationDropdown" class="sm:hidden bg-white shadow-lg">
+            <div class="px-4 py-2 space-y-1">
+                <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">Home</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('explore')" :active="route().current('explore')">Explore</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('friends')" :active="route().current('friends')">Friends</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('chat')" :active="route().current('chat')">Chat</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('groups')" :active="route().current('groups')">Groups</ResponsiveNavLink>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="fixed top-16 z-30 bg-gray-800 text-gray-200 h-full w-64 hidden sm:block">
+        <ul class="space-y-1 mt-4">
+            <li><Link href="/dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Home</Link></li>
+            <li><Link href="/explore" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Explore</Link></li>
+            <li><Link href="/friends" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Friends</Link></li>
+            <li><Link href="/chat" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Chat</Link></li>
+            <li><Link href="/groups" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Groups</Link></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="relative sm:ml-64 pt-20 bg-gray-100 min-h-screen p-6">
         <slot />
     </main>
 </template>
