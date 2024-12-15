@@ -38,7 +38,7 @@ Route::middleware([
     Route::get('/groups', [GroupController::class, 'index'])->name('groups');
     
     Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
-    Route::get('/post', [PostController::class, 'post'])->name('dashboard.post');
+    Route::get('/post/{id}', [PostController::class, 'post'])->name('dashboard.post');
     Route::get('/user', [UserController::class, 'user'])->name('user');
     Route::get('/group', [GroupController::class, 'group'])->name('group');
 

@@ -21,20 +21,32 @@ class PostController extends Controller {
         ]);
     }
 
-    public function post(Request $request) {
-        $post = Post::find($request->input('id'));
-
+    public function post(string $id) {
+        $post = Post::find($id);
         return Inertia::render('Post', [
             'post' => $post
         ]);
     }
 
     public function show(Request $request) {
-        $posts = Post::with('users')->get();
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+                
+            // Debug: Log the search term
+            \Log::info("Search term: " . $searchTerm);
+    
+            // Search posts by title or content
+            $posts = Post::with('users')->where(function ($query) use ($searchTerm) {
+                $query->where('title', 'like', '%' . $searchTerm . '%')
+                        ->orWhere('content', 'like', '%' . $searchTerm . '%');
+            })->get();
+        } else {
+             // Fetch all posts with related users
+            $posts = Post::with('users')->get();
+        }
+        \Log::info("Posts: " . $posts);
         
-        //return response()->json($posts);
-
-        return Inertia::render('Explore', [
+         return Inertia::render('Explore', [
             'posts' => $posts
         ]);
     }
