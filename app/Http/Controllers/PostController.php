@@ -49,6 +49,7 @@ class PostController extends Controller {
          return Inertia::render('Explore', [
             'posts' => $posts
         ]);
+        //
     }
 
     public function store(StorePostRequest $request) {
