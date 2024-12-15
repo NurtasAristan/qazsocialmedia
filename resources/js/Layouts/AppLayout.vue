@@ -310,7 +310,7 @@ const logout = () => {
                     <Link :href="route('dashboard')">
                         <ApplicationMark class="block h-9 w-auto" />
                     </Link>
-                    <span class="text-lg font-bold">Social Network</span>
+                    <span class="text-lg font-bold">QazSocialMedia</span>
                 </div>
 
                 <!-- Desktop Navigation -->
