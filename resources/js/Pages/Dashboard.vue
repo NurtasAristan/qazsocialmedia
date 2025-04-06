@@ -138,12 +138,18 @@ const deletePost = (id) => {
 
         <!-- Posts Section -->
         <section class="my-8">
-            <div class="max-w-4xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                <div v-for="post in myPosts" :key="post.id" class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+            <div class="max-w-4xl mx-auto flex flex-col space-y-6">
+                <div
+                    v-for="post in myPosts"
+                    :key="post.id"
+                    class="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow"
+                >
                     <div class="flex justify-between items-center border-b pb-2">
                         <div>
                             <h3 class="text-lg font-bold text-gray-800">{{ user.name }}</h3>
-                            <span class="text-sm text-gray-500">Posted on {{ new Date(post.created_at).toLocaleDateString() }}</span>
+                            <span class="text-sm text-gray-500">
+                                Posted on {{ new Date(post.created_at).toLocaleDateString() }}
+                            </span>
                         </div>
                         <DropdownMenu :post="post" />
                     </div>

@@ -63,11 +63,15 @@ class User extends Authenticatable
         ];
     }
 
-    public function posts() {
-        return $this->belongsToMany(Post::class);
-    }
-
     public function groups() {
         return $this->belongsToMany(Group::class);
+    }
+
+    public function nationality() {
+        return $this->belongsTo(Nationality::class);
+    }
+
+    public function posts() {
+        return $this->belongsToMany(Post::class);
     }
 }
