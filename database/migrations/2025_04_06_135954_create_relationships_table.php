@@ -16,15 +16,15 @@ return new class extends Migration
 
             // From: either user or person (only one must be filled)
             $table->foreignId('from_user_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->foreignId('from_person_id')->nullable()->constrained('persons')->onDelete('cascade');
+            $table->foreignId('from_person_id')->nullable()->constrained('people')->onDelete('cascade');
 
             // To: either user or person (only one must be filled)
             $table->foreignId('to_user_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->foreignId('to_person_id')->nullable()->constrained('persons')->onDelete('cascade');
+            $table->foreignId('to_person_id')->nullable()->constrained('people')->onDelete('cascade');
             
             // Relationship type (e.g., parent, sibling, friend)
             $table->string('type');
-            
+
             $table->timestamps();
         });
     }
