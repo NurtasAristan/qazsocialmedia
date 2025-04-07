@@ -49,10 +49,10 @@ const deletePost = (id) => {
 <template>
     <AppLayout title="Dashboard">
         <!-- Header Section -->
-        <header class="text-center py-6 bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg">
+        <!--header class="text-center py-6 bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg">
             <h1 class="text-4xl font-bold">Welcome, {{ user.name }}</h1>
             <p class="mt-2 text-lg">Share your thoughts and explore posts!</p>
-        </header>
+        </header-->
 
         <!-- Create Post Form -->
         <div class="my-8 mx-auto max-w-4xl">
