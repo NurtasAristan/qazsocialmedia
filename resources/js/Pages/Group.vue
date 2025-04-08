@@ -18,6 +18,13 @@ defineProps({
           <div v-if="group.description" class="mb-4">
             <p class="text-gray-700 text-base">{{ group.description }}</p>
           </div>
+          <!--button
+            v-if="user.id !== currentUser.id"
+            @click="toggleFollow(user.id)"
+            class="text-sm px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
+          >
+            {{ followedUserIds.includes(user.id) ? 'Unfollow' : 'Follow' }}
+          </button-->
           <div class="font-bold mb-2">Group Members</div>
           <div v-for="user in users" :key="user.id">
             <Link :href="`/users/${user.id}`" class="block mb-2 text-gray-800 hover:underline">

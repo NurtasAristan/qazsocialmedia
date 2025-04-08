@@ -320,6 +320,7 @@ const logout = () => {
                     <NavLink :href="route('friends')" :active="route().current('friends')">Friends</NavLink>
                     <NavLink :href="route('chat')" :active="route().current('chat')">Chat</NavLink>
                     <NavLink :href="route('groups')" :active="route().current('groups')">Groups</NavLink>
+                    <NavLink :href="route('person')" :active="route().current('person')">Person</NavLink>
                 </div>
 
                 <!-- User Dropdown -->
@@ -361,6 +362,7 @@ const logout = () => {
                 <ResponsiveNavLink :href="route('friends')" :active="route().current('friends')">Friends</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('chat')" :active="route().current('chat')">Chat</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('groups')" :active="route().current('groups')">Groups</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('person')" :active="route().current('person')">Person</ResponsiveNavLink>
             </div>
         </div>
     </nav>
@@ -373,6 +375,7 @@ const logout = () => {
             <li><Link href="/friends" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Friends</Link></li>
             <li><Link href="/chat" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Chat</Link></li>
             <li><Link href="/groups" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Groups</Link></li>
+            <li><Link href="/person" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Person</Link></li>
         </ul>
     </aside>
 

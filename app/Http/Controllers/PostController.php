@@ -38,7 +38,7 @@ class PostController extends Controller {
             // Search posts by title or content
             $posts = Post::with('users')->where(function ($query) use ($searchTerm) {
                 $query->where('title', 'like', '%' . $searchTerm . '%')
-                        ->orWhere('content', 'like', '%' . $searchTerm . '%');
+                      ->orWhere('content', 'like', '%' . $searchTerm . '%');
             })->get();
         } else {
              // Fetch all posts with related users

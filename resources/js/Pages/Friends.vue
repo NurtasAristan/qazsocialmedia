@@ -101,7 +101,7 @@ const performSearch = () => {
                                 </div>
                                 <h3 class="text-lg font-semibold text-gray-800">{{ user.name }}</h3>
                             </div>
-                            <p class="mt-2 text-sm text-gray-500">Nationality: {{ user.nationality }}</p>
+                            <!--p class="mt-2 text-sm text-gray-500">Nationality: {{ user.nationality }}</p-->
                         </Link>
                     </div>
                 </div>

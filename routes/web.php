@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FcmController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
 use App\Http\Request\StorePostRequest;
@@ -39,6 +40,8 @@ Route::middleware([
     Route::get('/post/{id}', [PostController::class, 'post'])->name('dashboard.post');
     Route::get('/user', [UserController::class, 'user'])->name('user');
     Route::get('/group', [GroupController::class, 'group'])->name('group');
+
+    Route::get('/person', [PersonController::class, 'index'])->name('person');
 
     Route::post('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 });
