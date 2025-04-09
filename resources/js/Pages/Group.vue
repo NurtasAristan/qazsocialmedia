@@ -1,10 +1,30 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-defineProps({ 
+import { Link, router } from '@inertiajs/vue3';
+import { ref } from 'vue';
+
+const { group, users, isFollowing } = defineProps({ 
     group: Object,
-    users: Array
+    users: Array,
+    isFollowing: Boolean,
 })
 
+const following = ref(isFollowing)
+const loading = ref(false)
+
+const toggleFollow = async () => {
+  loading.value = true
+  try {
+    await router.post(`/groups/${group.id}/follow`, {}, {
+      preserveScroll: true,
+      onSuccess: () => {
+        following.value = !following.value
+      }
+    })
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <template>
@@ -18,13 +38,14 @@ defineProps({
           <div v-if="group.description" class="mb-4">
             <p class="text-gray-700 text-base">{{ group.description }}</p>
           </div>
-          <!--button
-            v-if="user.id !== currentUser.id"
-            @click="toggleFollow(user.id)"
-            class="text-sm px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
+          <button
+            @click="toggleFollow"
+            class="ml-4 px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+            :disabled="loading"
           >
-            {{ followedUserIds.includes(user.id) ? 'Unfollow' : 'Follow' }}
-          </button-->
+            {{ following ? 'Unfollow' : 'Follow' }}
+          </button>
+          <div class="font-bold mb-2">{{ users.length }}</div>
           <div class="font-bold mb-2">Group Members</div>
           <div v-for="user in users" :key="user.id">
             <Link :href="`/users/${user.id}`" class="block mb-2 text-gray-800 hover:underline">

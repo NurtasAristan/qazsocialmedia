@@ -74,4 +74,8 @@ class User extends Authenticatable
     public function posts() {
         return $this->belongsToMany(Post::class);
     }
+
+    public function followingGroups() {
+        return $this->belongsToMany(Group::class, 'group_user');
+    }
 }

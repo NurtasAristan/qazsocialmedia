@@ -32,8 +32,10 @@ class PersonController extends Controller {
     }
 
     public function store(StorePersonRequest $request) {
-        $newPerson = Person::create($request->validated());
-        Auth::user()->groups()->attach($newGroup->id);
+        $validated = $request->validated();
+        $validated['created_by'] = Auth::id(); // add user ID
+
+        Person::create($validated);
         return to_route('person');
     }
 }

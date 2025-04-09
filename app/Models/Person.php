@@ -14,5 +14,6 @@ class Person extends Model
         'birth_date',
         'gender',
         'description',
+        'created_by',
     ];
 }

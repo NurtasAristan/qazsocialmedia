@@ -23,7 +23,7 @@ class StorePersonRequest extends FormRequest
     {
         return [
             'full_name' => 'required',
-            'birht_date' => 'nullable',
+            'birth_date' => 'nullable',
             'gender' => 'nullable',
             'description' => 'nullable|string'
         ];

@@ -35,13 +35,15 @@ Route::middleware([
     Route::get('/friends', [UserController::class, 'index'])->name('friends');
     Route::get('/chat', [ChatController::class, 'index'])->name('chat');
     Route::get('/groups', [GroupController::class, 'index'])->name('groups');
-    
     Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
+
     Route::get('/post/{id}', [PostController::class, 'post'])->name('dashboard.post');
     Route::get('/user', [UserController::class, 'user'])->name('user');
     Route::get('/group', [GroupController::class, 'group'])->name('group');
+    Route::post('/groups/{group}/follow', [GroupController::class, 'toggleFollow'])->name('groups.follow');
 
     Route::get('/person', [PersonController::class, 'index'])->name('person');
+    Route::post('/person', [PersonController::class, 'store'])->name('person.store');
 
     Route::post('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 });

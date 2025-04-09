@@ -19,10 +19,12 @@ class GroupController extends Controller {
     public function group(Request $request) {
         $group = Group::find($request->input('id'));
         $users = $group->users()->get();
+        $isFollowing = auth()->check() && auth()->user()->followingGroups()->where('group_id', $group->id)->exists();
 
         return Inertia::render('Group', [
             'group' => $group,
-            'users' => $users
+            'users' => $users,
+            'isFollowing' => $isFollowing,
         ]);
     }
 
@@ -38,5 +40,17 @@ class GroupController extends Controller {
         $newGroup = Group::create($request->validated());
         Auth::user()->groups()->attach($newGroup->id);
         return to_route('groups');
+    }
+
+    public function toggleFollow(Group $group) {
+        $user = auth()->user();
+
+        if ($user->followingGroups()->where('group_id', $group->id)->exists()) {
+            $user->followingGroups()->detach($group->id);
+        } else {
+            $user->followingGroups()->attach($group->id);
+        }
+
+        return back();
     }
 }
