@@ -12,7 +12,7 @@ const addPersonForm = useForm({
 </script>
 
 <template>
-    <AppLayout title="Group">
+    <AppLayout title="Add Person">
         <div class="container mx-auto px-4 py-8">
             <h1 class="text-2xl font-bold text-gray-800 mb-4">Create Person</h1>
             <form @submit.prevent="addPersonForm.post('/person')" class="space-y-4">
