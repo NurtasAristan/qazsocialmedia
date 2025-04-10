@@ -46,4 +46,8 @@ Route::middleware([
     Route::post('/person', [PersonController::class, 'store'])->name('person.store');
 
     Route::post('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+
+    Route::get('/feed', function () {
+        return Inertia::render('KnowledgeFeed');
+    })->name('feed');
 });
