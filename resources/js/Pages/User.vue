@@ -24,7 +24,7 @@ defineProps({
             <!-- Posts Section -->
             <div>
                 <h2 class="text-xl font-bold text-gray-800 mb-4">Posts by {{ user.name }}</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="flex flex-col gap-6">
                     <div
                         v-for="post in posts"
                         :key="post.id"

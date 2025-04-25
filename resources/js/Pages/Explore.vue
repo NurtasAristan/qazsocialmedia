@@ -51,8 +51,8 @@ const performSearch = () => {
             </div>
         </form>
 
-        <!-- Posts Grid -->
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
+        <!-- Posts List -->
+        <div class="flex flex-col gap-6 max-w-3xl mx-auto">
             <div
                 v-for="post in posts"
                 :key="post.id"

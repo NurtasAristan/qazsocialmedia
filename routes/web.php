@@ -32,15 +32,19 @@ Route::middleware([
     Route::delete('/dashboard/{id}', [PostController::class, 'destroy'])->name('dashboard.destroy');
 
     Route::get('/explore', [PostController::class, 'show'])->name('explore');
+
     Route::get('/friends', [UserController::class, 'index'])->name('friends');
+
     Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+
     Route::get('/groups', [GroupController::class, 'index'])->name('groups');
     Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
-
-    Route::get('/post/{id}', [PostController::class, 'post'])->name('dashboard.post');
-    Route::get('/user', [UserController::class, 'user'])->name('user');
     Route::get('/group', [GroupController::class, 'group'])->name('group');
     Route::post('/groups/{group}/follow', [GroupController::class, 'toggleFollow'])->name('groups.follow');
+
+    Route::get('/post/{id}', [PostController::class, 'post'])->name('dashboard.post');
+
+    Route::get('/user', [UserController::class, 'user'])->name('user');
 
     Route::get('/person', [PersonController::class, 'index'])->name('person');
     Route::post('/person', [PersonController::class, 'store'])->name('person.store');
@@ -50,4 +54,7 @@ Route::middleware([
     Route::get('/feed', function () {
         return Inertia::render('KnowledgeFeed');
     })->name('feed');
+
+    Route::get('/profile/{name}', [ProfileController::class, 'show']);
+    Route::put('/profile', [ProfileController::class, 'update']);
 });

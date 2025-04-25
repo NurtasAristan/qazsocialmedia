@@ -1,0 +1,21 @@
+{
+    "navigation": {
+      "home": "Басты бет",
+      "explore": "Шолу",
+      "friends": "Достар",
+      "chat": "Чат",
+      "groups": "Топтар",
+      "person": "Адам",
+      "feed": "Лента"
+    },
+    "buttons": {
+      "post": "Жариялау",
+      "edit": "Өңдеу",
+      "delete": "Жою",
+      "save_changes": "Өзгерістерді сақтау",
+      "cancel": "Бас тарту",
+      "logout": "Шығу",
+      "profile": "Профиль",
+      "api_tokens": "API Токендер"
+    }
+  }

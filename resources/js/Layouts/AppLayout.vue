@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n'
 import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -22,6 +23,13 @@ const switchToTeam = (team) => {
     });
 };
 
+const { locale } = useI18n()
+
+const changeLanguage = (lang) => {
+    locale.value = lang
+    localStorage.setItem('lang', lang) // Optional: save selection
+}
+
 const logout = () => {
     router.post(route('logout'));
 };
@@ -42,15 +50,13 @@ const logout = () => {
                     <span class="text-lg font-bold">QazSocialMedia</span>
                 </div>
 
-                <!-- Desktop Navigation -->
-                <div class="hidden sm:flex sm:items-center space-x-6">
-                    <NavLink :href="route('dashboard')" :active="route().current('dashboard')">Home</NavLink>
-                    <NavLink :href="route('explore')" :active="route().current('explore')">Explore</NavLink>
-                    <NavLink :href="route('friends')" :active="route().current('friends')">Friends</NavLink>
-                    <NavLink :href="route('chat')" :active="route().current('chat')">Chat</NavLink>
-                    <NavLink :href="route('groups')" :active="route().current('groups')">Groups</NavLink>
-                    <NavLink :href="route('person')" :active="route().current('person')">Person</NavLink>
-                    <NavLink :href="route('feed')" :active="route().current('feed')">Feed</NavLink>
+                <div class="flex items-center space-x-2">
+                    <select v-model="locale" @change="changeLanguage($event.target.value)" 
+                        class="px-2 py-1 rounded bg-none bg-white text-blue-500 hover:bg-blue-100">
+                        <option value="en">EN</option>
+                        <option value="ru">RU</option>
+                        <option value="kk">KK</option>
+                    </select>
                 </div>
 
                 <!-- User Dropdown -->
@@ -87,13 +93,13 @@ const logout = () => {
         <!-- Responsive Navigation -->
         <div v-if="showingNavigationDropdown" class="sm:hidden bg-white shadow-lg">
             <div class="px-4 py-2 space-y-1">
-                <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">Home</ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('explore')" :active="route().current('explore')">Explore</ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('friends')" :active="route().current('friends')">Friends</ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('chat')" :active="route().current('chat')">Chat</ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('groups')" :active="route().current('groups')">Groups</ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('person')" :active="route().current('person')">Person</ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('feed')" :active="route().current('feed')">Feed</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">{{ $t('navigation.home') }}</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('explore')" :active="route().current('explore')">{{ $t('navigation.explore') }}</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('friends')" :active="route().current('friends')">{{ $t('navigation.friends') }}</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('chat')" :active="route().current('chat')">{{ $t('navigation.chat') }}</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('groups')" :active="route().current('groups')">{{ $t('navigation.groups') }}</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('person')" :active="route().current('person')">{{ $t('navigation.person') }}</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('feed')" :active="route().current('feed')">{{ $t('navigation.feed') }}</ResponsiveNavLink>
             </div>
         </div>
     </nav>
@@ -101,13 +107,13 @@ const logout = () => {
     <!-- Sidebar -->
     <aside class="fixed top-16 z-30 bg-gray-800 text-gray-200 h-full w-64 hidden sm:block">
         <ul class="space-y-1 mt-4">
-            <li><Link href="/dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Home</Link></li>
-            <li><Link href="/explore" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Explore</Link></li>
-            <li><Link href="/friends" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Friends</Link></li>
-            <li><Link href="/chat" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Chat</Link></li>
-            <li><Link href="/groups" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Groups</Link></li>
-            <li><Link href="/person" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Person</Link></li>
-            <li><Link href="/feed" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">Feed</Link></li>
+            <li><Link href="/dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.home') }}</Link></li>
+            <li><Link href="/explore" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.explore') }}</Link></li>
+            <li><Link href="/friends" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.friends') }}</Link></li>
+            <li><Link href="/chat" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.chat') }}</Link></li>
+            <li><Link href="/groups" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.groups') }}</Link></li>
+            <li><Link href="/person" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.person') }}</Link></li>
+            <li><Link href="/feed" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.feed') }}</Link></li>
         </ul>
     </aside>
 

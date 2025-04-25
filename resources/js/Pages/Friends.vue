@@ -88,21 +88,25 @@ const performSearch = () => {
                 </div>
 
                 <!-- User Cards -->
-                <div class="w-full sm:w-2/3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div
-                        v-for="user in users"
-                        :key="user.id"
-                        class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
-                    >
-                        <Link href="/user" :data="{ id: user.id }" class="block">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-600">
-                                    <span class="material-symbols-outlined">person</span>
+                <div class="w-full sm:w-2/3">
+                    <div v-if="users.length === 0" class="text-center text-gray-500 text-lg mt-10">
+                        No users found matching your criteria.
+                    </div>
+                    <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div
+                            v-for="user in users"
+                            :key="user.id"
+                            class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
+                        >
+                            <Link href="/user" :data="{ id: user.id }" class="block">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-600">
+                                        <span class="material-symbols-outlined">person</span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-800">{{ user.name }}</h3>
                                 </div>
-                                <h3 class="text-lg font-semibold text-gray-800">{{ user.name }}</h3>
-                            </div>
-                            <!--p class="mt-2 text-sm text-gray-500">Nationality: {{ user.nationality }}</p-->
-                        </Link>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

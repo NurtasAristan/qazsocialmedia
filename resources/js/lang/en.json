@@ -1,0 +1,21 @@
+{
+    "navigation": {
+        "home": "Home",
+        "explore": "Explore",
+        "friends": "Friends",
+        "chat": "Chat",
+        "groups": "Groups",
+        "person": "Person",
+        "feed": "Feed"
+    },
+    "buttons": {
+        "post": "Post",
+        "edit": "Edit",
+        "delete": "Delete",
+        "save_changes": "Save Changes",
+        "cancel": "Cancel",
+        "logout": "Logout",
+        "profile": "Profile",
+        "api_tokens": "API Tokens"
+    }
+}
