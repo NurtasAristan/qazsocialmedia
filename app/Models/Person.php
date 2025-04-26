@@ -16,4 +16,6 @@ class Person extends Model
         'description',
         'created_by',
     ];
+
+    
 }

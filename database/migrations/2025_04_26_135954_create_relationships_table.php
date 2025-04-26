@@ -13,15 +13,12 @@ return new class extends Migration
     {
         Schema::create('relationships', function (Blueprint $table) {
             $table->id();
-
-            // From: either user or person (only one must be filled)
-            $table->foreignId('from_person_id')->nullable()->constrained('people')->onDelete('cascade');
-            $table->foreignId('to_person_id')->nullable()->constrained('people')->onDelete('cascade');
-            
-            // Relationship type (e.g., parent, sibling, friend)
-            $table->string('type');
-
+            $table->foreignId('person1_id')->constrained('people')->onDelete('cascade');
+            $table->foreignId('person2_id')->constrained('people')->onDelete('cascade');
+            $table->enum('type', ['parent', 'spouse']); // 'parent' means person1 is parent of person2
             $table->timestamps();
+        
+            $table->unique(['person1_id', 'person2_id', 'type']);
         });
     }
 
