@@ -9,17 +9,16 @@ class Message extends Model {
 
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'content'
-    ];
+    protected $fillable = ['chat_id', 'sender_id', 'content', 'attachment', 'read_at'];
 
-    public function userLikes() {
-        return $this->hasMany(Like::class)->where('user_id', auth()->id());
+    public function chat()
+    {
+        return $this->belongsTo(Chat::class);
+    }
+
+    public function sender()
+    {
+        return $this->belongsTo(User::class, 'sender_id');
     }
 
 }

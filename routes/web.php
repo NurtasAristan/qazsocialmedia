@@ -3,7 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\ChatController;
+use App\Http\Controllers\Web\ChatController;
 use App\Http\Controllers\FcmController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PersonController;
@@ -36,7 +36,7 @@ Route::middleware([
 
     Route::get('/friends', [UserController::class, 'index'])->name('friends');
 
-    Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+    //Route::get('/chat', [ChatController::class, 'index'])->name('chat');
 
     Route::get('/groups', [GroupController::class, 'index'])->name('groups');
     Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
@@ -61,4 +61,8 @@ Route::middleware([
 
     Route::get('/shezhire', [ShezhireController::class, 'index'])->name('shezhire.index');
     Route::post('/shezhire/add-relative', [ShezhireController::class, 'addRelative'])->name('shezhire.addRelative');
+
+    Route::get('/chats', [ChatController::class, 'index'])->name('chat.index');
+    Route::get('/chats/{chat}', [ChatController::class, 'show'])->name('chat.show');
+    Route::post('/chats/{chat}/message', [ChatController::class, 'sendMessage'])->name('chat.send');
 });
