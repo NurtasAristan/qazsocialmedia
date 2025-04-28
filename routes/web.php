@@ -9,6 +9,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Web\ShezhireController;
 use App\Http\Request\StorePostRequest;
 
 Route::get('/', function () {
@@ -57,4 +58,7 @@ Route::middleware([
 
     Route::get('/profile/{name}', [ProfileController::class, 'show']);
     Route::put('/profile', [ProfileController::class, 'update']);
+
+    Route::get('/shezhire', [ShezhireController::class, 'index'])->name('shezhire.index');
+    Route::post('/shezhire/add-relative', [ShezhireController::class, 'addRelative'])->name('shezhire.addRelative');
 });

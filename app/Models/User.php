@@ -68,15 +68,23 @@ class User extends Authenticatable
         return $this->belongsToMany(Group::class)->withTimestamps();
     }
 
-    public function nationality() {
+    public function nationality() 
+    {
         return $this->belongsTo(Nationality::class);
     }
 
-    public function posts() {
+    public function person()
+    {
+        return $this->hasOne(Person::class);
+    }
+
+    public function posts() 
+    {
         return $this->belongsToMany(Post::class);
     }
 
-    public function followingGroups() {
+    public function followingGroups() 
+    {
         return $this->belongsToMany(Group::class, 'group_user');
     }
 }

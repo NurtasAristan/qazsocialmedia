@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Person;
 
+// Not Used
 class AuthController extends Controller {
     public function register(Request $request) {
         $validatedData = $request->validate([
@@ -21,9 +23,14 @@ class AuthController extends Controller {
             'password' => Hash::make($validatedData['password']),
         ]);
 
-        /*Person::create([
-            ''
-        ]);*/
+        Person::create([
+            'user_id' => $user->id,
+            'created_by' => $user->id, // the user who created this person is himself
+            'full_name'  => $validatedData['name'],
+            'gender'     => null,      // optionally you can extend register form to accept gender
+            'birth_date' => null,      // optionally extend form to accept birth date
+            'bio'        => null,      // or empty by default
+        ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 

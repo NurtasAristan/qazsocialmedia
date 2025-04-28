@@ -10,45 +10,18 @@ class Relationship extends Model
     use HasFactory;
 
     protected $fillable = [
-        'from_user_id',
-        'from_person_id',
-        'to_user_id',
-        'to_person_id',
+        'person1_id',
+        'person2_id',
         'type',
-        /*'direction',
-        'confirmed',
-        'metadata',*/
     ];
 
-    public function fromUser()
+    public function person1()
     {
-        return $this->belongsTo(User::class, 'from_user_id');
+        return $this->belongsTo(Person::class, 'person1_id');
     }
 
-    public function fromPerson()
+    public function person2()
     {
-        return $this->belongsTo(Person::class, 'from_person_id');
-    }
-
-    public function toUser()
-    {
-        return $this->belongsTo(User::class, 'to_user_id');
-    }
-
-    public function toPerson()
-    {
-        return $this->belongsTo(Person::class, 'to_person_id');
-    }
-
-    // Accessors
-
-    public function from()
-    {
-        return $this->fromUser ?? $this->fromPerson;
-    }
-
-    public function to()
-    {
-        return $this->toUser ?? $this->toPerson;
+        return $this->belongsTo(Person::class, 'person2_id');
     }
 }

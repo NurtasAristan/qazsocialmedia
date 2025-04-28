@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Web;
 
 use App\Models\Person;
+use App\Models\Relationship;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -10,35 +13,55 @@ class ShezhireController extends Controller
 {
     public function index()
     {
-        $user = auth()->user();
+        $user = Auth::user();
 
-        // Assuming each user is connected to a Person model
-        $rootPerson = $user->person;
-
-        if (!$rootPerson) {
-            return Inertia::render('Shezhire/NoPerson', [
-                'message' => 'No associated person found. Please create your profile.'
-            ]);
-        }
-
-        // Load relationships: parents, children, spouses, etc.
-        $familyTree = $this->buildTree($rootPerson);
+        $person = $user->person()->with(['children', 'parents', 'spouses'])->first();
 
         return Inertia::render('Shezhire/Index', [
-            'tree' => $familyTree,
-            'rootPersonId' => $rootPerson->id,
+            'person' => $person,
         ]);
     }
 
-    protected function buildTree(Person $person)
+    public function addRelative(Request $request)
     {
-        return $person->load([
-            'father',
-            'mother',
-            'spouses',
-            'children' => function ($query) {
-                $query->with(['spouses', 'children']); // Recursive children tree (to 2 levels deep)
-            },
+        $request->validate([
+            'full_name' => 'required|string|max:255',
+            'type' => 'required|in:child,parent,spouse',
         ]);
+
+        $user = Auth::user();
+        $mainPerson = $user->person;
+
+        // Create the new relative Person
+        $newPerson = Person::create([
+            'created_by' => $user->id,
+            'full_name' => $request->full_name,
+            'birth_date' => null,
+            'gender' => null,
+            'bio' => null,
+        ]);
+
+        // Depending on relationship type, link them
+        if ($request->type === 'child') {
+            Relationship::create([
+                'person1_id' => $mainPerson->id,
+                'person2_id' => $newPerson->id,
+                'type' => 'parent',
+            ]);
+        } elseif ($request->type === 'parent') {
+            Relationship::create([
+                'person1_id' => $newPerson->id,
+                'person2_id' => $mainPerson->id,
+                'type' => 'parent',
+            ]);
+        } elseif ($request->type === 'spouse') {
+            Relationship::create([
+                'person1_id' => $mainPerson->id,
+                'person2_id' => $newPerson->id,
+                'type' => 'spouse',
+            ]);
+        }
+
+        return redirect()->route('shezhire.index')->with('success', 'Relative added successfully!');
     }
 }
