@@ -28,9 +28,9 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', [PostController::class, 'index'])->name('dashboard');
-    Route::post('/dashboard', [PostController::class, 'store'])->name('dashboard.store');
-    Route::delete('/dashboard/{id}', [PostController::class, 'destroy'])->name('dashboard.destroy');
+    Route::get('/home', [PostController::class, 'index'])->name('home');
+    Route::post('/home', [PostController::class, 'store'])->name('home.store');
+    Route::delete('/home/{id}', [PostController::class, 'destroy'])->name('home.destroy');
 
     Route::get('/explore', [PostController::class, 'show'])->name('explore');
 
@@ -43,7 +43,7 @@ Route::middleware([
     Route::get('/group', [GroupController::class, 'group'])->name('group');
     Route::post('/groups/{group}/follow', [GroupController::class, 'toggleFollow'])->name('groups.follow');
 
-    Route::get('/post/{id}', [PostController::class, 'post'])->name('dashboard.post');
+    Route::get('/post/{id}', [PostController::class, 'post'])->name('home.post');
 
     Route::get('/user', [UserController::class, 'user'])->name('user');
 

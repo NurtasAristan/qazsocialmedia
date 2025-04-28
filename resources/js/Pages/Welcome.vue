@@ -61,10 +61,10 @@ function handleImageError() {
                     <div v-if="canLogin" class="space-x-4">
                         <Link
                             v-if="$page.props.auth.user"
-                            :href="route('dashboard')"
+                            :href="route('home')"
                             class="px-4 py-2 text-sm font-semibold text-white bg-[#FF2D20] rounded-md shadow-lg hover:bg-[#e52518]"
                         >
-                            Dashboard
+                            Home
                         </Link>
                         <template v-else>
                             <Link

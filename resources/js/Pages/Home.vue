@@ -41,16 +41,16 @@ const submitEdit = () => {
 
 const deletePost = (id) => {
     if (confirm('Are you sure you want to delete this post?')) {
-        router.delete(route("dashboard.destroy",id))
+        router.delete(route("home.destroy",id))
     }
 };
 </script>
 
 <template>
-    <AppLayout title="Dashboard">
+    <AppLayout title="Home">
         <!-- Create Post Form -->
         <div class="my-8 mx-auto max-w-4xl">
-            <form @submit.prevent="form.post('/dashboard')" class="p-6 bg-white rounded-lg shadow-md">
+            <form @submit.prevent="form.post('/home')" class="p-6 bg-white rounded-lg shadow-md">
                 <div class="space-y-4">
                     <div>
                         <label for="title" class="block text-sm font-medium text-gray-700">Title</label>

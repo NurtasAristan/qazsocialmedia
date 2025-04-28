@@ -15,7 +15,7 @@ class PostController extends Controller {
         $user = Auth::user();
         $myPosts = Auth::user()->posts()->get();
 
-        return Inertia::render('Dashboard', [
+        return Inertia::render('Home', [
             'user' => $user,
             'myPosts' => $myPosts
         ]);
@@ -55,7 +55,7 @@ class PostController extends Controller {
     public function store(StorePostRequest $request) {
         $newPost = Post::create($request->validated());
         Auth::user()->posts()->attach($newPost->id);
-        return to_route('dashboard');
+        return to_route('home');
     }
 
     public function update(Request $request, Post $post) {
@@ -67,12 +67,12 @@ class PostController extends Controller {
 
         $post->update($validatedData);
 
-        return redirect()->route('dashboard')->with('status', 'Post updated successfully.');
+        return redirect()->route('home')->with('status', 'Post updated successfully.');
     }
 
     public function destroy(string $id) {
         $post = Post::find($id);
         $post->delete();
-        return redirect()->route('dashboard')->with('status', 'Post deleted');
+        return redirect()->route('home')->with('status', 'Post deleted');
     }
 }

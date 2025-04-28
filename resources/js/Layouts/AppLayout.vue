@@ -44,7 +44,7 @@ const logout = () => {
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
                 <div class="flex items-center space-x-4">
-                    <Link :href="route('dashboard')">
+                    <Link :href="route('home')">
                         <ApplicationMark class="block h-9 w-auto" />
                     </Link>
                     <span class="text-lg font-bold">QazSocialMedia</span>
@@ -93,7 +93,7 @@ const logout = () => {
         <!-- Responsive Navigation -->
         <div v-if="showingNavigationDropdown" class="sm:hidden bg-white shadow-lg">
             <div class="px-4 py-2 space-y-1">
-                <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">{{ $t('navigation.home') }}</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('home')" :active="route().current('home')">{{ $t('navigation.home') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('explore')" :active="route().current('explore')">{{ $t('navigation.explore') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('friends')" :active="route().current('friends')">{{ $t('navigation.friends') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('chat')" :active="route().current('chat')">{{ $t('navigation.chat') }}</ResponsiveNavLink>
@@ -107,7 +107,7 @@ const logout = () => {
     <!-- Sidebar -->
     <aside class="fixed top-16 z-30 bg-gray-800 text-gray-200 h-full w-64 hidden sm:block">
         <ul class="space-y-1 mt-4">
-            <li><Link href="/dashboard" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.home') }}</Link></li>
+            <li><Link href="/home" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.home') }}</Link></li>
             <li><Link href="/explore" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.explore') }}</Link></li>
             <li><Link href="/friends" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.friends') }}</Link></li>
             <li><Link href="/chat" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.chat') }}</Link></li>
