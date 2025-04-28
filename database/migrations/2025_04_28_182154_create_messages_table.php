@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sender_id')->references('id')->on('users');
-            $table->unsignedBigInteger('reciever_id')->references('id')->on('users');
-            $table->text('content');
+            $table->foreignId('chat_id')->constrained('chats')->onDelete('cascade');
+            $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
+            $table->text('content')->nullable();
+            $table->string('attachment')->nullable(); // if you want to allow images/files
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
