@@ -141,8 +141,8 @@ onUnmounted(() => {
 
                 <div v-else class="flex-1 flex items-center justify-center text-gray-500">
                     <div class="text-center">
-                    <h2 class="text-xl font-semibold">No Chat Selected</h2>
-                    <p class="mt-2 text-sm">Select a chat to start messaging</p>
+                    <h2 class="text-xl font-semibold">{{ $t('chat.no_chat.h2') }}</h2>
+                    <p class="mt-2 text-sm">{{ $t('chat.no_chat.p') }}</p>
                     </div>
                 </div>
             </main>

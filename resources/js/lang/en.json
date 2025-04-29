@@ -22,5 +22,11 @@
         "logout": "Logout",
         "profile": "Profile",
         "api_tokens": "API Tokens"
+    },
+    "chat": {
+        "no_chat": {
+            "h2": "No Chat Selected",
+            "p": "Select a chat to start messaging"
+        }
     }
 }
