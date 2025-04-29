@@ -1,4 +1,8 @@
 {
+    "welcome": {
+        "log_in": "Log in",
+        "register": "Register"
+    },
     "navigation": {
         "home": "Home",
         "explore": "Explore",

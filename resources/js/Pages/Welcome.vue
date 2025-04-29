@@ -58,27 +58,35 @@ function handleImageError() {
             <header class="w-full max-w-4xl px-6 py-10">
                 <nav class="flex items-center justify-between">
                     <h1 class="text-3xl font-bold text-[#FF2D20]">QazSocialMedia</h1>
+                    <div>
+                            <select v-model="locale" @change="changeLanguage($event.target.value)" 
+                                class="px-2 py-1 rounded bg-none bg-white text-blue-500 hover:bg-blue-100">
+                                <option value="en">EN</option>
+                                <option value="ru">RU</option>
+                                <option value="kk">KK</option>
+                            </select>
+                        </div>
                     <div v-if="canLogin" class="space-x-4">
                         <Link
                             v-if="$page.props.auth.user"
                             :href="route('home')"
                             class="px-4 py-2 text-sm font-semibold text-white bg-[#FF2D20] rounded-md shadow-lg hover:bg-[#e52518]"
                         >
-                            Home
+                        {{ $t('navigation.home') }}
                         </Link>
                         <template v-else>
                             <Link
                                 :href="route('login')"
                                 class="px-4 py-2 text-sm font-semibold text-white bg-[#FF2D20] rounded-md shadow-lg hover:bg-[#e52518]"
                             >
-                                Log in
+                            {{ $t('welcome.log_in') }}
                             </Link>
                             <Link
                                 v-if="canRegister"
                                 :href="route('register')"
                                 class="px-4 py-2 text-sm font-semibold text-white bg-gray-600 rounded-md shadow-lg hover:bg-gray-700"
                             >
-                                Register
+                            {{ $t('welcome.register') }}
                             </Link>
                         </template>
                     </div>
