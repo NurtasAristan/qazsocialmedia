@@ -96,7 +96,7 @@ const logout = () => {
                 <ResponsiveNavLink :href="route('home')" :active="route().current('home')">{{ $t('navigation.home') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('explore')" :active="route().current('explore')">{{ $t('navigation.explore') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('friends')" :active="route().current('friends')">{{ $t('navigation.friends') }}</ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('chats')" :active="route().current('chats')">{{ $t('navigation.chat') }}</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('chat')" :active="route().current('chat')">{{ $t('navigation.chat') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('groups')" :active="route().current('groups')">{{ $t('navigation.groups') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('person')" :active="route().current('person')">{{ $t('navigation.person') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('feed')" :active="route().current('feed')">{{ $t('navigation.feed') }}</ResponsiveNavLink>
@@ -111,7 +111,7 @@ const logout = () => {
             <li><Link href="/home" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.home') }}</Link></li>
             <li><Link href="/explore" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.explore') }}</Link></li>
             <li><Link href="/friends" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.friends') }}</Link></li>
-            <li><Link href="/chats" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.chat') }}</Link></li>
+            <li><Link href="/chat" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.chat') }}</Link></li>
             <li><Link href="/groups" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.groups') }}</Link></li>
             <li><Link href="/person" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.person') }}</Link></li>
             <li><Link href="/feed" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.feed') }}</Link></li>

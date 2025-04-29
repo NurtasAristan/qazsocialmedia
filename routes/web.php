@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Web\ChatController;
 use App\Http\Controllers\FcmController;
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\GroupController;
@@ -36,7 +37,9 @@ Route::middleware([
 
     Route::get('/friends', [UserController::class, 'index'])->name('friends');
 
-    //Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+    Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+    Route::get('/chats/{chat}/messages', [ChatController::class, 'messages'])->middleware('auth');
+    Route::post('/chats/{chat}/messages', [ChatController::class, 'sendMessage'])->middleware('auth');
 
     Route::get('/groups', [GroupController::class, 'index'])->name('groups');
     Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
@@ -52,9 +55,7 @@ Route::middleware([
 
     Route::post('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 
-    Route::get('/feed', function () {
-        return Inertia::render('KnowledgeFeed');
-    })->name('feed');
+    Route::get('/feed', function () { return Inertia::render('KnowledgeFeed'); })->name('feed');
 
     Route::get('/profile/{name}', [ProfileController::class, 'show']);
     Route::put('/profile', [ProfileController::class, 'update']);
@@ -62,7 +63,10 @@ Route::middleware([
     Route::get('/shezhire', [ShezhireController::class, 'index'])->name('shezhire.index');
     Route::post('/shezhire/add-relative', [ShezhireController::class, 'addRelative'])->name('shezhire.addRelative');
 
-    Route::get('/chats', [ChatController::class, 'index'])->name('chat.index');
+    /*Route::get('/chats', [ChatController::class, 'index'])->name('chat.index');
     Route::get('/chats/{chat}', [ChatController::class, 'show'])->name('chat.show');
-    Route::post('/chats/{chat}/message', [ChatController::class, 'sendMessage'])->name('chat.send');
+    Route::post('/chats/{chat}/message', [ChatController::class, 'sendMessage'])->name('chat.send');*/
+
+    Route::post('/users/{user}/follow', [FollowController::class, 'follow'])->name('users.follow');
+    Route::delete('/users/{user}/unfollow', [FollowController::class, 'unfollow'])->name('users.unfollow');
 });
