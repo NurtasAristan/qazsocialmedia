@@ -10,7 +10,8 @@
         "chat": "Chat",
         "groups": "Groups",
         "person": "Person",
-        "feed": "Feed"
+        "feed": "Feed",
+        "shezhire": "Shezhire"
     },
     "buttons": {
         "post": "Post",
