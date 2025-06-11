@@ -61,11 +61,11 @@ const performSearch = () => {
                         <label for="gender-filter" class="block text-sm font-medium text-gray-600 mb-1">
                             Gender
                         </label>
-                        <input type="radio" name="gender" value="any" checked><label>Any</label>
-                        <input type="radio" name="gender" value="male"><label>Male</label>
-                        <input type="radio" name="gender" value="female"><label>Female</label>
+                        <input type="radio" name="gender" value="any" checked><label class="px-2">Any</label>
+                        <input type="radio" name="gender" value="male"><label class="px-2">Male</label>
+                        <input type="radio" name="gender" value="female"><label class="px-2">Female</label>
                     </div>
-                    <div>
+                    <div class="mt-4">
                         <label for="settlement-filter" class="block text-sm font-medium text-gray-600 mb-1">
                             Settlement
                         </label>
