@@ -61,9 +61,9 @@ function handleImageError() {
                     <div>
                             <select v-model="locale" @change="changeLanguage($event.target.value)" 
                                 class="px-2 py-1 rounded bg-none bg-white text-blue-500 hover:bg-blue-100">
-                                <option value="en">EN</option>
-                                <option value="ru">RU</option>
-                                <option value="kk">KK</option>
+                                <option value="en">{{ $t('language.english') }}/EN</option>
+                                <option value="ru">{{ $t('language.russian') }}/RU</option>
+                                <option value="kk">{{ $t('language.kazakh') }}/KK</option>
                             </select>
                         </div>
                     <div v-if="canLogin" class="space-x-4">
@@ -98,7 +98,7 @@ function handleImageError() {
                     Welcome to <span class="text-[#FF2D20]">QazSocialMedia</span>
                 </h2>
                 <p class="mt-4 text-lg sm:text-xl text-gray-500">
-                    A modern social media app for Kazakhstani people.
+                    {{ $t('welcome.description') }}
                 </p>
 
                 <div class="flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">

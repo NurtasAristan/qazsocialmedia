@@ -5,6 +5,7 @@
         "english": "English"
     },
     "welcome": {
+        "description": "A modern social media app for Kazakhstani people.",
         "log_in": "Log in",
         "register": "Register"
     },
