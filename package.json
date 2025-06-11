@@ -24,6 +24,7 @@
         "@balkangraph/familytree.js": "^1.9.45",
         "@balkangraph/orgchart.js": "^8.17.6",
         "@tailwindcss/line-clamp": "^0.4.4",
+        "family-chart": "^0.5.1",
         "laravel-vue-i18n": "^2.7.7",
         "vue-i18n": "^10.0.7"
     }

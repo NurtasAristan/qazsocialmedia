@@ -88,4 +88,8 @@ Route::middleware([
     Route::get('/familytree', function () {
         return Inertia::render('FamilyTree2');
     })->name('familytree');
+
+    Route::get('/familytree3', function () {
+        return Inertia::render('FamilyTree3');
+    })->name('familytree3');
 });

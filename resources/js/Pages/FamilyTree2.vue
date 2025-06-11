@@ -10,15 +10,13 @@ onMounted(() => {
       { 
           id: 1, 
           fatherId: 2, 
-          motherId: 3,  
-          spouseIds: [4],
-          childIds: [7],
+          motherId: 3,
           name: 'Мен' 
       }, 
-      {id: 2, spouseId: 3, childId: 1, name: 'Әкем Данияр'},
-      {id: 3, spouseId: 2, childId: 1, name: 'Анам Дана'},
-      {id: 4, childIds: [7], name: 'Жұбайым Сәуле'},
-      {id: 7, name: 'Ұлым Азамат'}
+      {id: 2, fatherId: 4, spouseIds: [3], childIds: [1], name: 'Мерхат'},
+      {id: 3, spouseIds: [2], childIds: [1], name: 'Маргисат'},
+      {id: 4, childIds: [2], name: 'Мәдени'},
+      {id: 5, fatherId: 4, name: 'Нұрлан'}
   ]).draw(2);
 
   // Remove the elements "Balkan FamilyTree JS 2"
