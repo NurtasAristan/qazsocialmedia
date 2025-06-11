@@ -16,23 +16,14 @@ class MessageSent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $chat;
-    public $message;
+    public $chat, $message;
 
-    /**
-     * Create a new event instance.
-     */
     public function __construct(Chat $chat, Message $message)
     {
         $this->chat = $chat;
         $this->message = $message;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
     public function broadcastOn(): array
     {
         return [
@@ -45,10 +36,5 @@ class MessageSent implements ShouldBroadcast
         return [
             'message' => $this->message->load('sender'),
         ];
-    }
-
-    public function broadcastAs()
-    {
-        return 'MessageSent';
     }
 }

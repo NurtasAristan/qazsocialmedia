@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Models\Like;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\User;
@@ -21,6 +22,14 @@ class PostController extends Controller {
         ]);
     }
 
+    public function like(Post $post) {
+        $like = new Like;
+        $like->post_id = $post->id;
+        $like->user_id = Auth::id();
+        $like->save();
+        return back();
+    }
+
     public function post(string $id) {
         $post = Post::find($id);
         return Inertia::render('Post', [
@@ -31,37 +40,36 @@ class PostController extends Controller {
     public function show(Request $request) {
         if ($request->has('search')) {
             $searchTerm = $request->input('search');
-                
-            // Debug: Log the search term
-            \Log::info("Search term: " . $searchTerm);
     
             // Search posts by title or content
-            $posts = Post::with('users')->where(function ($query) use ($searchTerm) {
-                $query->where('title', 'like', '%' . $searchTerm . '%')
-                      ->orWhere('content', 'like', '%' . $searchTerm . '%');
+            $posts = Post::with('user')->where(function ($query) use ($searchTerm) {
+                $query->where('content', 'like', '%' . $searchTerm . '%');
             })->get();
         } else {
-             // Fetch all posts with related users
-            $posts = Post::with('users')->get();
+            $posts = Post::with(['user', 'likes'])->get();
         }
-        \Log::info("Posts: " . $posts);
-        
-         return Inertia::render('Explore', [
+
+        return Inertia::render('Explore', [
+            'userId' => Auth::id(),
             'posts' => $posts
         ]);
         //
     }
 
     public function store(StorePostRequest $request) {
-        $newPost = Post::create($request->validated());
-        Auth::user()->posts()->attach($newPost->id);
+        $validated = $request->validated();
+
+        $post = new Post;
+        $post->user_id = Auth::id();
+        $post->content = $request->content;
+        $post->save();
+        
         return to_route('home');
     }
 
     public function update(Request $request, Post $post) {
 
         $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
             'content' => 'required|string',
         ]);
 

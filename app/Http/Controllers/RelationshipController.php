@@ -2,63 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Relationship;
 use Illuminate\Http\Request;
 
 class RelationshipController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $request->validate([
+            'person_id' => 'required|exists:people,id',
+            'relative_id' => 'required|exists:people,id|different:person_id',
+            'type' => 'required|in:parent,child,spouse',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        if (Relationship::where([
+            ['person_id', $validated['relative_id']],
+            ['relative_id', $validated['person_id']],
+            ['type', $validated['type']]
+        ])->exists()) {
+            return back()->withErrors(['duplicate' => 'Мұндай байланыс бар']);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        Relationship::createBidirectional(
+            $validated['person_id'],
+            $validated['relative_id'],
+            $validated['type']
+        );
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return back()->with('success', 'Байланыс қосылды');
     }
 }

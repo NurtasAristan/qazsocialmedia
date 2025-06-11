@@ -16,6 +16,7 @@ class ShezhireController extends Controller
         $user = Auth::user();
 
         $person = $user->person()->with(['children', 'parents', 'spouses'])->first();
+        \Log::info($person);
 
         return Inertia::render('Shezhire/Index', [
             'person' => $person,

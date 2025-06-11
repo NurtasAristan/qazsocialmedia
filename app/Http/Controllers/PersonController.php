@@ -38,4 +38,9 @@ class PersonController extends Controller {
         Person::create($validated);
         return to_route('person');
     }
+
+    public function showFamily() 
+    {
+        
+    }
 }

@@ -7,11 +7,22 @@ const props = defineProps({
   chats: Array
 });
 
+const menuOpen = ref(false)
+
 const selectedChat = ref(null);
 const messages = ref([]);
 const newMessage = ref("");
 const messagesBox = ref(null);
 let channel = null;
+
+async function createChat() {
+    try {
+        const data = await axios.post('/chat/create')
+        await selectChat(data)
+    } catch (e) {
+        console.error('Failed to create chat:', e)
+    }
+}
 
 async function selectChat(chat) {
     selectedChat.value = chat;
@@ -64,8 +75,25 @@ onUnmounted(() => {
             <!-- Sidebar -->
             <aside class="w-full sm:w-1/4 p-4 bg-gray-100">
                 <!-- Chats Header -->
-                <div class="mb-4">
-                    <h2 class="text-lg font-bold text-gray-700">Chats</h2>
+                <div class="flex mb-4 justify-between">
+                    <div class="flex flex-col justify-center">
+                        <h2 class="text-lg font-bold text-gray-700">Chats</h2>
+                    </div>
+                    
+
+                    <div>
+                        <span @click="menuOpen = !menuOpen" class="material-symbols-outlined rounded p-1 hover:bg-gray-200">edit_square</span>
+                        <div v-show="menuOpen" class="absolute bg-white shadow z-50 rounded p-2">
+                            <div class="flex hover:bg-gray-200 cursor-pointer" @click="createChat">
+                                <span class="material-symbols-outlined">person_add</span>
+                                <div>Create a chat</div>
+                            </div>
+                            <div class="flex hover:bg-gray-200">
+                                <div><span class="material-symbols-outlined">group</span></div>
+                                <div>New group chat</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Search Bar -->
@@ -146,6 +174,16 @@ onUnmounted(() => {
                     </div>
                 </div>
             </main>
+        </div>
+        
+        <!--Create Chat-->
+        <div>
+
+        </div>
+
+        <!---->
+        <div>
+
         </div>
     </AppLayout>
 </template>

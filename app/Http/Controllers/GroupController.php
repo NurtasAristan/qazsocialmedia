@@ -19,7 +19,7 @@ class GroupController extends Controller {
     public function group(Request $request) {
         $group = Group::find($request->input('id'));
         $users = $group->users()->get();
-        $isFollowing = auth()->check() && auth()->user()->followingGroups()->where('group_id', $group->id)->exists();
+        $isFollowing = auth()->check() && auth()->user()->groups()->where('group_id', $group->id)->exists();
 
         return Inertia::render('Group', [
             'group' => $group,
@@ -45,10 +45,10 @@ class GroupController extends Controller {
     public function toggleFollow(Group $group) {
         $user = auth()->user();
 
-        if ($user->followingGroups()->where('group_id', $group->id)->exists()) {
-            $user->followingGroups()->detach($group->id);
+        if ($user->groups()->where('group_id', $group->id)->exists()) {
+            $user->groups()->detach($group->id);
         } else {
-            $user->followingGroups()->attach($group->id);
+            $user->groups()->attach($group->id);
         }
 
         return back();

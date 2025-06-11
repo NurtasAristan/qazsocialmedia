@@ -9,13 +9,13 @@ defineProps({
 const menuOpen = ref(false)
 
 const toggleMenu = () => {
-    menuOpen = !menuOpen
+    menuOpen.value = !menuOpen.value
 }
 
 </script>
 
 <template>
-    <div >
+    <div>
         <span @click="menuOpen = !menuOpen" class="material-symbols-outlined rounded-full hover:bg-gray-200">more_horiz</span>
         <div v-show="menuOpen" class="menu absolute bg-white shadow rounded p-2 mt-2">
             <Link href="route('posts.show', post.id)" class="menu-item">View</Link>

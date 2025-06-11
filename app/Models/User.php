@@ -63,14 +63,14 @@ class User extends Authenticatable
         ];
     }
 
-    public function groups()
-    {
-        return $this->belongsToMany(Group::class)->withTimestamps();
-    }
-
     public function nationality() 
     {
         return $this->belongsTo(Nationality::class);
+    }
+
+    public function settlement() 
+    {
+        return $this->belongsTo(Settlement::class);
     }
 
     public function person()
@@ -78,9 +78,24 @@ class User extends Authenticatable
         return $this->hasOne(Person::class);
     }
 
+    public function createdPeople()
+    {
+        return $this->hasMany(Person::class, 'created_by');
+    }
+
     public function posts() 
     {
-        return $this->belongsToMany(Post::class);
+        return $this->hasMany(Post::class);
+    }
+
+    public function likes() 
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function hasLiked($post)
+    {
+        return $this->likes()->where('post_id', $post->id)->exists();
     }
 
     public function followingGroups() 
@@ -91,5 +106,23 @@ class User extends Authenticatable
     public function chats() 
     {
         return $this->belongsToMany(Chat::class, 'chat_user');
+    }
+
+    // Users you are following
+    public function followings()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id')->withTimestamps();
+    }
+
+    // Users following you
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id')->withTimestamps();
+    }
+
+    // Groups you follow
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
     }
 }

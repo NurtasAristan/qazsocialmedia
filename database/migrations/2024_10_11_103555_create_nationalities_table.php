@@ -17,6 +17,12 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        DB::table('nationalities')->insert([
+            ['name' => 'Kazakh'],
+            ['name' => 'Russian'],
+        ]);
+
     }
 
     /**

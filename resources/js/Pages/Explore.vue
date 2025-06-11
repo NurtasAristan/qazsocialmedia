@@ -2,8 +2,10 @@
 import { ref } from 'vue';
 import {Link, router} from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
+import Post from '@/Components/Post.vue';
 
 defineProps({ 
+    userId: Number,
     posts: Array,
 })
 
@@ -53,24 +55,19 @@ const performSearch = () => {
 
         <!-- Posts List -->
         <div class="flex flex-col gap-6 max-w-3xl mx-auto">
-            <div
+            <Post v-for="post in posts" :userId="userId" :post="post"></Post>
+            <!--div
                 v-for="post in posts"
                 :key="post.id"
                 class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow border border-gray-200"
             >
-                <Link
-                    :href="`/post/${post.id}`"
-                    class="block text-lg font-semibold text-gray-800 hover:underline"
-                >
-                    {{ post.title }}
-                </Link>
                 <p class="text-sm text-gray-600 mt-2 line-clamp-2">
                     {{ post.content }}
                 </p>
                 <div class="mt-4 text-sm text-gray-500">
-                    By {{ post.users[0].name }} | {{ new Date(post.created_at).toLocaleDateString() }}
+                    {{ post.user.name }} | {{ new Date(post.created_at).toLocaleDateString() }}
                 </div>
-            </div>
+            </div-->
         </div>
     </AppLayout>
 </template>

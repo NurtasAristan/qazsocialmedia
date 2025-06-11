@@ -12,7 +12,7 @@ const form = useForm({
 });
 
 function submit() {
-    form.post(route('shezhire.addRelative'), {
+    form.post(route('shezhire.addRelative', { person: person.id }), {
         preserveScroll: true,
     });
 }
@@ -21,35 +21,55 @@ function submit() {
 <template>
     <AppLayout title="Shezhire">
         <div class="p-6 space-y-8">
-            <h1 class="text-2xl font-bold">{{ person.full_name }}</h1>
+            <h1 class="text-2xl font-bold text-center">{{ person.full_name }}</h1>
 
-            <!-- Relatives list -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                    <h2 class="font-semibold">Children</h2>
-                    <ul class="list-disc ml-4">
-                        <li v-for="child in person.children" :key="child.id">
-                            {{ child.full_name }}
-                        </li>
-                    </ul>
-                </div>
+            <!-- Family Tree View -->
+            <div class="flex flex-col items-center space-y-6">
 
-                <div>
-                    <h2 class="font-semibold">Parents</h2>
-                    <ul class="list-disc ml-4">
-                        <li v-for="parent in person.parents" :key="parent.id">
+                <!-- Parents -->
+                <div class="flex flex-col items-center">
+                    <div class="font-semibold mb-1">Parents</div>
+                    <div class="flex space-x-4">
+                        <div
+                            v-for="parent in person.parents"
+                            :key="parent.id"
+                            class="p-3 bg-gray-100 rounded-lg border shadow-sm"
+                        >
                             {{ parent.full_name }}
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
 
-                <div>
-                    <h2 class="font-semibold">Spouses</h2>
-                    <ul class="list-disc ml-4">
-                        <li v-for="spouse in person.spouses" :key="spouse.id">
+                <!-- Self + Spouses -->
+                <div class="flex flex-col items-center">
+                    <div class="p-3 bg-blue-100 rounded-lg border shadow text-center">
+                        {{ person.full_name }}
+                    </div>
+                    <div class="w-px h-6 bg-gray-400"></div>
+                    <div class="relative flex items-center justify-center space-x-6 mt-2 w-full">
+                        <div class="absolute top-1/2 left-0 right-0 h-px bg-gray-400 z-0"></div>
+                        <div
+                            v-for="spouse in person.spouses"
+                            :key="spouse.id"
+                            class="relative z-10 p-3 bg-gray-100 rounded-lg border shadow-sm"
+                        >
                             {{ spouse.full_name }}
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Children -->
+                <div class="flex flex-col items-center">
+                    <div class="font-semibold mb-1">Children</div>
+                    <div class="flex space-x-4">
+                        <div
+                            v-for="child in person.children"
+                            :key="child.id"
+                            class="p-3 bg-gray-100 rounded-lg border shadow-sm"
+                        >
+                            {{ child.full_name }}
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -59,7 +79,12 @@ function submit() {
                 <form @submit.prevent="submit" class="space-y-4">
                     <div>
                         <label class="block mb-1 font-medium">Full Name</label>
-                        <input type="text" v-model="form.full_name" class="border rounded px-3 py-2 w-full" required />
+                        <input
+                            type="text"
+                            v-model="form.full_name"
+                            class="border rounded px-3 py-2 w-full"
+                            required
+                        />
                     </div>
 
                     <div>

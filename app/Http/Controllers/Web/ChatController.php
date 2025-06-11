@@ -22,30 +22,18 @@ class ChatController extends Controller
         ]);
     }
 
+    public function store() 
+    {
+        $newChat = new Chat();
+        $newChat->save();
+        $newChat->users()->attach(Auth::id());
+        return to_route('chat');
+    }
+
     public function messages(Chat $chat)
     {
         return $chat->messages()->with('sender')->get();
     }
-    
-    /*public function index()
-    {
-        $chats = Auth::user()->chats()->with('users', 'messages.sender')->get();
-        Log::info($chats);
-
-        return Inertia::render('Chat/Index', [
-            'chats' => $chats,
-        ]);
-    }
-
-    public function show(Chat $chat)
-    {
-        $chat->load('users', 'messages.sender');
-        Log::info($chat);
-
-        return Inertia::render('Chat/Show', [
-            'chat' => $chat,
-        ]);
-    }*/
 
     public function sendMessage(Request $request, Chat $chat)
     {
@@ -55,9 +43,7 @@ class ChatController extends Controller
         ]);
 
         $message->load('sender');
-        Log::info($message);
 
-        // Broadcast event here (Pusher)
         broadcast(new MessageSent($chat, $message))->toOthers();
 
         return response()->json($message);

@@ -55,8 +55,16 @@ const performSearch = () => {
             <!-- Filters and User Cards -->
             <div class="flex flex-col sm:flex-row gap-6">
                 <!-- Filters -->
-                <div class="w-full sm:w-1/3 bg-gray-100 p-4 rounded-lg shadow-md">
+                <div class="w-full sm:w-1/3 bg-gray-100 p-4 rounded-lg shadow-md sm:self-start">
                     <h2 class="text-lg font-semibold text-gray-700 mb-4">Filters</h2>
+                    <div>
+                        <label for="gender-filter" class="block text-sm font-medium text-gray-600 mb-1">
+                            Gender
+                        </label>
+                        <input type="radio" name="gender" value="any" checked><label>Any</label>
+                        <input type="radio" name="gender" value="male"><label>Male</label>
+                        <input type="radio" name="gender" value="female"><label>Female</label>
+                    </div>
                     <div>
                         <label for="settlement-filter" class="block text-sm font-medium text-gray-600 mb-1">
                             Settlement
@@ -92,18 +100,20 @@ const performSearch = () => {
                     <div v-if="users.length === 0" class="text-center text-gray-500 text-lg mt-10">
                         No users found matching your criteria.
                     </div>
-                    <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div v-else class="flex flex-col gap-4">
                         <div
                             v-for="user in users"
                             :key="user.id"
                             class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow"
                         >
-                            <Link href="/user" :data="{ id: user.id }" class="block">
+                            <Link :href="'/user/'+encodeURIComponent(user.name)" class="block">
                                 <div class="flex items-center gap-4">
                                     <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-600">
                                         <span class="material-symbols-outlined">person</span>
                                     </div>
                                     <h3 class="text-lg font-semibold text-gray-800">{{ user.name }}</h3>
+                                    <p class="text-lg text-gray-800">{{ user.nationality.name }}</p>
+                                    <p class="text-lg text-gray-800">{{ user.settlement ? user.settlement.name : 'Unknown' }}</p>
                                 </div>
                             </Link>
                         </div>

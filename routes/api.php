@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Requests\StorePostRequest;
 use App\Models\User;
+use App\Http\Controllers\Api\TranslationController;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -52,7 +53,7 @@ Route::post('/login', function (Request $request) {
     ]);
 });
 
-
+Route::post('/translate', [TranslationController::class, 'translate']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/posts', function (Request $request) {

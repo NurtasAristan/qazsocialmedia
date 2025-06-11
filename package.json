@@ -21,6 +21,8 @@
         "vue": "^3.3.13"
     },
     "dependencies": {
+        "@balkangraph/familytree.js": "^1.9.45",
+        "@balkangraph/orgchart.js": "^8.17.6",
         "@tailwindcss/line-clamp": "^0.4.4",
         "laravel-vue-i18n": "^2.7.7",
         "vue-i18n": "^10.0.7"

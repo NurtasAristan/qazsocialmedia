@@ -27,7 +27,7 @@ const { locale } = useI18n()
 
 const changeLanguage = (lang) => {
     locale.value = lang
-    localStorage.setItem('lang', lang) // Optional: save selection
+    localStorage.setItem('lang', lang)
 }
 
 const logout = () => {
@@ -72,10 +72,17 @@ const logout = () => {
                     </template>
 
                     <template #content>
-                        <DropdownLink :href="route('profile.show')">Profile</DropdownLink>
-                        <DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">API Tokens</DropdownLink>
+                        <div class="flex items-center text-gray-500">
+                            <span class="material-symbols-outlined size-[20px]">settings</span>
+                            <DropdownLink :href="route('profile.show')">Profile</DropdownLink>
+                        </div>
+                        <!--DropdownLink v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')">API Tokens</DropdownLink-->
                         <form method="POST" @submit.prevent="logout">
-                            <DropdownLink as="button">Logout</DropdownLink>
+                            <div class="flex items-center text-gray-500">
+                                <span class="material-symbols-outlined size-[20px]">logout</span>
+                                <DropdownLink as="button">Logout</DropdownLink>
+                            </div>
+                            
                         </form>
                     </template>
                 </Dropdown>
@@ -95,7 +102,7 @@ const logout = () => {
             <div class="px-4 py-2 space-y-1">
                 <ResponsiveNavLink :href="route('home')" :active="route().current('home')">{{ $t('navigation.home') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('explore')" :active="route().current('explore')">{{ $t('navigation.explore') }}</ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('shezhire')" :active="route().current('shezhire')">{{ $t('navigation.shezhire') }}</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('familytree')" :active="route().current('familytree')">{{ $t('navigation.familytree') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('friends')" :active="route().current('friends')">{{ $t('navigation.friends') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('chat')" :active="route().current('chat')">{{ $t('navigation.chat') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('groups')" :active="route().current('groups')">{{ $t('navigation.groups') }}</ResponsiveNavLink>
@@ -108,14 +115,52 @@ const logout = () => {
     <!-- Sidebar -->
     <aside class="fixed top-16 z-30 bg-gray-800 text-gray-200 h-full w-64 hidden sm:block">
         <ul class="space-y-1 mt-4">
-            <li><Link href="/home" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.home') }}</Link></li>
-            <li><Link href="/explore" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.explore') }}</Link></li>
-            <li><Link href="/shezhire" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.shezhire') }}</Link></li>
-            <li><Link href="/friends" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.friends') }}</Link></li>
-            <li><Link href="/chat" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.chat') }}</Link></li>
-            <li><Link href="/groups" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.groups') }}</Link></li>
+            <li>
+                <Link href="/home" class="block flex items-center px-4 py-2 hover:bg-gray-700 rounded-lg">
+                    <span class="material-symbols-outlined mr-2">home</span>
+                    {{ $t('navigation.home') }}
+                </Link>
+            </li>
+            <li>
+                <Link href="/explore" class="block flex items-center px-4 py-2 hover:bg-gray-700 rounded-lg">
+                    <span class="material-symbols-outlined mr-2">explore</span>
+                    {{ $t('navigation.explore') }}
+                </Link>
+            </li>
+            <li>
+                <Link href="/familytree" class="block flex items-center px-4 py-2 hover:bg-gray-700 rounded-lg">
+                    <span class="material-symbols-outlined mr-2">family_history</span>
+                    {{ $t('navigation.familytree') }}
+                </Link>
+            </li>
+            <li>
+                <Link href="/friends" class="block flex items-center px-4 py-2 hover:bg-gray-700 rounded-lg">
+                    <span class="material-symbols-outlined mr-2">person_search</span>
+                    {{ $t('navigation.friends') }}
+                </Link>
+            </li>
+            <li>
+                <Link href="/chat" class="block flex items-center px-4 py-2 hover:bg-gray-700 rounded-lg">
+                    <span class="material-symbols-outlined mr-2">chat</span>
+                    {{ $t('navigation.chat') }}
+                </Link>
+            </li>
+            <li>
+                <Link href="/groups" class="block flex items-center px-4 py-2 hover:bg-gray-700 rounded-lg">
+                    <span class="material-symbols-outlined mr-2">groups</span>
+                    {{ $t('navigation.groups') }}
+                </Link>
+            </li>
+            <li>
+                <Link href="/groups" class="block flex items-center px-4 py-2 hover:bg-gray-700 rounded-lg">
+                    <span class="material-symbols-outlined mr-2">account_circle</span>
+                    Profile
+                </Link>
+            </li>
+
             <li><Link href="/person" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.person') }}</Link></li>
             <li><Link href="/feed" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.feed') }}</Link></li>
+            
         </ul>
     </aside>
 

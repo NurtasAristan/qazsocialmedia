@@ -4,6 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Web\ChatController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\FcmController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PostController;
@@ -11,6 +13,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Web\ShezhireController;
+use App\Http\Controllers\Web\FamilyTreeController;
 use App\Http\Request\StorePostRequest;
 
 Route::get('/', function () {
@@ -38,8 +41,9 @@ Route::middleware([
     Route::get('/friends', [UserController::class, 'index'])->name('friends');
 
     Route::get('/chat', [ChatController::class, 'index'])->name('chat');
-    Route::get('/chats/{chat}/messages', [ChatController::class, 'messages'])->middleware('auth');
-    Route::post('/chats/{chat}/messages', [ChatController::class, 'sendMessage'])->middleware('auth');
+    Route::post('/chat/create', [ChatController::class, 'store']);
+    Route::get('/chats/{chat}/messages', [ChatController::class, 'messages']);
+    Route::post('/chats/{chat}/messages', [ChatController::class, 'sendMessage']);
 
     Route::get('/groups', [GroupController::class, 'index'])->name('groups');
     Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
@@ -47,8 +51,6 @@ Route::middleware([
     Route::post('/groups/{group}/follow', [GroupController::class, 'toggleFollow'])->name('groups.follow');
 
     Route::get('/post/{id}', [PostController::class, 'post'])->name('home.post');
-
-    Route::get('/user', [UserController::class, 'user'])->name('user');
 
     Route::get('/person', [PersonController::class, 'index'])->name('person');
     Route::post('/person', [PersonController::class, 'store'])->name('person.store');
@@ -63,10 +65,27 @@ Route::middleware([
     Route::get('/shezhire', [ShezhireController::class, 'index'])->name('shezhire.index');
     Route::post('/shezhire/add-relative', [ShezhireController::class, 'addRelative'])->name('shezhire.addRelative');
 
-    /*Route::get('/chats', [ChatController::class, 'index'])->name('chat.index');
-    Route::get('/chats/{chat}', [ChatController::class, 'show'])->name('chat.show');
-    Route::post('/chats/{chat}/message', [ChatController::class, 'sendMessage'])->name('chat.send');*/
-
+    Route::get('/user', [UserController::class, 'user'])->name('user');
+    Route::get('/user/{user:name}', [UserController::class, 'show']);
     Route::post('/users/{user}/follow', [FollowController::class, 'follow'])->name('users.follow');
     Route::delete('/users/{user}/unfollow', [FollowController::class, 'unfollow'])->name('users.unfollow');
+
+    Route::get('/family-tree', [FamilyTreeController::class, 'index'])->name('family.tree');
+    Route::get('/family-tree/create/{parent?}', [FamilyTreeController::class, 'create'])->name('family.tree.create');
+    Route::post('/family-tree', [FamilyTreeController::class, 'store'])->name('family.tree.store');
+
+    Route::post('/posts/{post}/like', [PostController::class, 'like']);
+
+    Route::get('/gettranslate', function () {
+        return Inertia::render('TranslateForm');
+    });
+
+    Route::get('/family', [PersonController::class, 'showFamily']);
+
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
+    Route::post('/posts/{post}/likes', [LikeController::class, 'toggleLike']);
+
+    Route::get('/familytree', function () {
+        return Inertia::render('FamilyTree2');
+    })->name('familytree');
 });

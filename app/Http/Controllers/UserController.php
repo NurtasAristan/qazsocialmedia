@@ -12,7 +12,7 @@ use Inertia\Inertia;
 
 class UserController extends Controller {
     public function index() {
-        $users = User::all();
+        $users = User::with(['nationality:id,name', 'settlement'])->get();
         $settlements = Settlement::all();
         $nationalities = Nationality::all();
 
@@ -36,5 +36,13 @@ class UserController extends Controller {
     public function users() {
         $users = User::all();
         return response()->json($users);
+    }
+
+    public function show(User $user)
+    { 
+        $user->load(['nationality', 'settlement', 'posts.user'])->firstOrFail(); 
+        return Inertia::render('User', [
+            'user' => $user
+        ]);
     }
 }

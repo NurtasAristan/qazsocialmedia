@@ -15,7 +15,6 @@ class Post extends Model {
      * @var array
      */
     protected $fillable = [
-        'title',
         'content',
     ];
 
@@ -24,19 +23,14 @@ class Post extends Model {
     }
 
     public function comments() {
-        return $this->hasMany(Comment::class)->latest();
+        return $this->hasMany(Comment::class);
     }
 
     public function likes() {
         return $this->hasMany(Like::class);
     }
 
-    public function users() {
-        return $this->belongsToMany(User::class);
+    public function user() {
+        return $this->belongsTo(User::class);
     }
-
-    public function userLikes() {
-        return $this->hasMany(Like::class)->where('user_id', auth()->id());
-    }
-
 }

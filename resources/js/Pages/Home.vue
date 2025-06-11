@@ -13,14 +13,12 @@ const editingPost = ref(null);
 
 const form = useForm({
     id: null,
-    title: null,
     content: null,
 })
 
 const startEditing = (post) => {
     editingPost.value = post;
     form.id = post.id;
-    form.title = post.title;
     form.content = post.content;
 };
 
@@ -53,17 +51,6 @@ const deletePost = (id) => {
             <form @submit.prevent="form.post('/home')" class="p-6 bg-white rounded-lg shadow-md">
                 <div class="space-y-4">
                     <div>
-                        <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
-                        <input
-                            type="text"
-                            v-model="form.title"
-                            id="title"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                            placeholder="Enter a title"
-                            required
-                        />
-                    </div>
-                    <div>
                         <label for="content" class="block text-sm font-medium text-gray-700">Content</label>
                         <textarea
                             v-model="form.content"
@@ -90,15 +77,6 @@ const deletePost = (id) => {
                 <h2 class="text-xl font-semibold text-gray-700 mb-4">Edit Post</h2>
                 <form @submit.prevent="submitEdit">
                     <div class="space-y-4">
-                        <div>
-                            <label for="edit-title" class="block text-sm font-medium text-gray-700">Title</label>
-                            <input
-                                v-model="form.title"
-                                id="edit-title"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500"
-                                placeholder="Enter a title"
-                            />
-                        </div>
                         <div>
                             <label for="edit-content" class="block text-sm font-medium text-gray-700">Content</label>
                             <textarea
@@ -141,13 +119,12 @@ const deletePost = (id) => {
                         <div>
                             <h3 class="text-lg font-bold text-gray-800">{{ user.name }}</h3>
                             <span class="text-sm text-gray-500">
-                                Posted on {{ new Date(post.created_at).toLocaleDateString() }}
+                                {{ new Date(post.created_at).toLocaleDateString() }}
                             </span>
                         </div>
                         <DropdownMenu :post="post" />
                     </div>
                     <div class="mt-3">
-                        <h4 class="text-md font-semibold text-gray-700">{{ post.title }}</h4>
                         <p class="mt-2 text-gray-600">{{ post.content }}</p>
                     </div>
                     <div class="mt-4 flex justify-between">
