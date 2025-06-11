@@ -39,7 +39,7 @@ const logout = () => {
     <Head :title="title" />
 
     <!-- Top Navigation Bar -->
-    <nav class="fixed top-0 z-40 w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg">
+    <nav class="fixed top-0 z-40 w-full bg-gradient-to-r from-blue-500 to-yellow-300 text-white shadow-lg">
         <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
