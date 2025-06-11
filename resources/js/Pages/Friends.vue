@@ -112,7 +112,7 @@ const performSearch = () => {
                                         <img v-if="user.profile_photo_url" :src="user.profile_photo_url" class="h-8 w-8 rounded-full" alt="Profile">
                                     </div>
                                     <h3 class="text-lg font-semibold text-gray-800">{{ user.name }}</h3>
-                                    <p class="text-lg text-gray-800">{{ user.nationality.name }}</p>
+                                    <p class="text-lg text-gray-800">{{ user.nationality ? user.nationality.name : 'Unknown'}}</p>
                                     <p class="text-lg text-gray-800">{{ user.settlement ? user.settlement.name : 'Unknown' }}</p>
                                 </div>
                             </Link>
