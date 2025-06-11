@@ -53,9 +53,9 @@ const logout = () => {
                 <div class="flex items-center space-x-2">
                     <select v-model="locale" @change="changeLanguage($event.target.value)" 
                         class="px-2 py-1 rounded bg-none bg-white text-blue-500 hover:bg-blue-100">
-                        <option value="en">EN</option>
-                        <option value="ru">RU</option>
-                        <option value="kk">KK</option>
+                        <option value="en">{{ $t('language.english') }}/EN</option>
+                        <option value="ru">{{ $t('language.russian') }}/RU</option>
+                        <option value="kk">{{ $t('language.kazakh') }}/KK</option>
                     </select>
                 </div>
 

@@ -1,4 +1,9 @@
 {
+    "language": {
+        "kazakh": "Kazakh",
+        "russian": "Russian",
+        "english": "English"
+    },
     "welcome": {
         "log_in": "Log in",
         "register": "Register"

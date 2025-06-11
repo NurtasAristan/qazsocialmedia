@@ -1,4 +1,9 @@
 {
+  "language": {
+    "kazakh": "Қазақша",
+    "russian": "Орысша",
+    "english": "Ағылшынша"
+  },
   "welcome": {
       "log_in": "Кіру",
       "register": "Тіркелу"

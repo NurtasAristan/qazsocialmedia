@@ -1,4 +1,9 @@
 {
+  "language": {
+    "kazakh": "Казахский",
+    "russian": "Русский",
+    "english": "Английский"
+  },
   "welcome": {
       "log_in": "Войти",
       "register": "Регистрация"
