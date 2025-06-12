@@ -106,8 +106,8 @@ const logout = () => {
                 <ResponsiveNavLink :href="route('friends')" :active="route().current('friends')">{{ $t('navigation.friends') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('chat')" :active="route().current('chat')">{{ $t('navigation.chat') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('groups')" :active="route().current('groups')">{{ $t('navigation.groups') }}</ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('person')" :active="route().current('person')">{{ $t('navigation.person') }}</ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('feed')" :active="route().current('feed')">{{ $t('navigation.feed') }}</ResponsiveNavLink>
+                <!--ResponsiveNavLink :href="route('person')" :active="route().current('person')">{{ $t('navigation.person') }}</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('feed')" :active="route().current('feed')">{{ $t('navigation.feed') }}</ResponsiveNavLink-->
             </div>
         </div>
     </nav>
@@ -158,8 +158,8 @@ const logout = () => {
                 </Link>
             </li>
 
-            <li><Link href="/person" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.person') }}</Link></li>
-            <li><Link href="/feed" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.feed') }}</Link></li>
+            <!--li><Link href="/person" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.person') }}</Link></li>
+            <li><Link href="/feed" class="block px-4 py-2 hover:bg-gray-700 rounded-lg">{{ $t('navigation.feed') }}</Link></li-->
             
         </ul>
     </aside>
