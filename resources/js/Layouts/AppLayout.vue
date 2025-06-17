@@ -102,7 +102,7 @@ const logout = () => {
             <div class="px-4 py-2 space-y-1">
                 <ResponsiveNavLink :href="route('home')" :active="route().current('home')">{{ $t('navigation.home') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('explore')" :active="route().current('explore')">{{ $t('navigation.explore') }}</ResponsiveNavLink>
-                <ResponsiveNavLink :href="route('familytree')" :active="route().current('familytree')">{{ $t('navigation.familytree') }}</ResponsiveNavLink>
+                <ResponsiveNavLink :href="route('familytree3')" :active="route().current('familytree')">{{ $t('navigation.familytree') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('friends')" :active="route().current('friends')">{{ $t('navigation.friends') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('chat')" :active="route().current('chat')">{{ $t('navigation.chat') }}</ResponsiveNavLink>
                 <ResponsiveNavLink :href="route('groups')" :active="route().current('groups')">{{ $t('navigation.groups') }}</ResponsiveNavLink>
@@ -128,7 +128,7 @@ const logout = () => {
                 </Link>
             </li>
             <li>
-                <Link href="/familytree" class="block flex items-center px-4 py-2 hover:bg-gray-700 rounded-lg">
+                <Link href="/familytree3" class="block flex items-center px-4 py-2 hover:bg-gray-700 rounded-lg">
                     <span class="material-symbols-outlined mr-2">family_history</span>
                     {{ $t('navigation.familytree') }}
                 </Link>
